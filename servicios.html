@@ -28,32 +28,17 @@
         <li class="dropdown">
           <a href="tienda.html">Tienda</a>
           <div class="dropdown-menu mega-menu">
-            <div class="dropdown-column">
-              <h4>Productos</h4>
-              <a href="tienda.html#pr1">PR1: Perfumes</a>
-              <a href="tienda.html#pr2">PR2: Productos de limpieza</a>
-              <a href="tienda.html#pr3">PR3: Dulces</a>
-              <a href="tienda.html#pr4">PR4: Regalos decorados</a>
-            </div>
-            <div class="dropdown-column">
-              <h4>Colecciones</h4>
-              <a href="tienda.html#pr5">PR5: Cuidado de la piel</a>
-              <a href="tienda.html#pr6">PR6: Caja sorpresa</a>
-              <a href="tienda.html#pr7">PR7: Productos faciales</a>
-            </div>
-            <div class="dropdown-column">
-              <h4>Especiales</h4>
-              <a href="tienda.html#pr8">PR8: Rosas</a>
-              <a href="tienda.html#pr9">PR9: Similares</a>
-            </div>
+            <div class="dropdown-column"><h4>Productos</h4><a href="products/index.html?id=PR1">PR1: Perfumes</a><a href="products/index.html?id=PR2">PR2: Productos de limpieza</a><a href="products/index.html?id=PR3">PR3: Dulces</a><a href="products/index.html?id=PR4">PR4: Regalos decorados</a></div>
+            <div class="dropdown-column"><h4>Colecciones</h4><a href="products/index.html?id=PR5">PR5: Cuidado de la piel</a><a href="products/index.html?id=PR6">PR6: Caja sorpresa</a><a href="products/index.html?id=PR7">PR7: Productos faciales</a></div>
+            <div class="dropdown-column"><h4>Especiales</h4><a href="products/index.html?id=PR8">PR8: Rosas</a><a href="products/index.html?id=PR9">PR9: Similares</a></div>
           </div>
         </li>
         <li class="dropdown active-link">
           <a href="servicios.html">Servicios</a>
           <div class="dropdown-menu">
-            <a href="#cenas-romanticas">Cenas románticas</a>
-            <a href="#arreglos-florales">Arreglos florales</a>
-            <a href="#momentos-inolvidables">Momentos inolvidables</a>
+            <a href="services/index.html?id=cenas">Cenas románticas</a>
+            <a href="services/index.html?id=flores">Arreglos florales</a>
+            <a href="services/index.html?id=momentos">Momentos inolvidables</a>
           </div>
         </li>
         <li class="dropdown">
@@ -79,9 +64,9 @@
 
     <section class="section">
       <div class="cards service-page-grid">
-        <article class="card" id="cenas-romanticas"><h3>Cena romántica</h3><p>Montamos espacios íntimos y decorados con velas, flores y detalles personalizados.</p><div class="service-meta"><strong>Desde S/ 180.00 por persona</strong></div><button class="btn" data-service-select="cenas">Contratar servicio</button></article>
-        <article class="card" id="arreglos-florales"><h3>Arreglos florales</h3><p>Diseñamos arreglos con rosas, follajes y plantas decorativas para regalos y celebraciones.</p><div class="service-meta"><strong>Desde S/ 120.00 por persona</strong></div><button class="btn" data-service-select="flores">Contratar servicio</button></article>
-        <article class="card" id="momentos-inolvidables"><h3>Momentos inolvidables</h3><p>Preparamos experiencias como sorpresa, día de campo, tour, crucero y servicio de limusina.</p><div class="service-meta"><strong>Desde S/ 160.00 por persona</strong></div><button class="btn" data-service-select="momentos">Contratar servicio</button></article>
+        <article class="card" id="cenas-romanticas"><h3><a href="services/index.html?id=cenas">Cena romántica</a></h3><p>Montamos espacios íntimos y decorados con velas, flores y detalles personalizados.</p><div class="service-meta"><strong>Desde S/ 180.00 por persona</strong></div><a class="btn" href="services/index.html?id=cenas">Ver detalle</a></article>
+        <article class="card" id="arreglos-florales"><h3><a href="services/index.html?id=flores">Arreglos florales</a></h3><p>Diseñamos arreglos con rosas, follajes y plantas decorativas para regalos y celebraciones.</p><div class="service-meta"><strong>Desde S/ 120.00 por persona</strong></div><a class="btn" href="services/index.html?id=flores">Ver detalle</a></article>
+        <article class="card" id="momentos-inolvidables"><h3><a href="services/index.html?id=momentos">Momentos inolvidables</a></h3><p>Preparamos experiencias como sorpresa, día de campo, tour, crucero y servicio de limusina.</p><div class="service-meta"><strong>Desde S/ 160.00 por persona</strong></div><a class="btn" href="services/index.html?id=momentos">Ver detalle</a></article>
       </div>
     </section>
 
@@ -115,37 +100,15 @@
         <p class="booking-kicker">Reserva tu experiencia</p>
         <h2>Contrata tu servicio aquí</h2>
         <p>Selecciona el tipo de servicio, define la cantidad de personas, indica las fechas y completa los datos del titular. El sistema calculará automáticamente la reserva del 50%.</p>
-        <div class="booking-highlights">
-          <div><strong>Atención personalizada</strong><span>Te contactamos para confirmar.</span></div>
-          <div><strong>Reserva segura</strong><span>Separación con el 50% del monto.</span></div>
-        </div>
       </div>
-
       <form id="service-booking-form" class="booking-form">
         <h3>Formulario de reserva</h3>
         <div class="form-grid two-cols">
           <label><span>Tipo de servicio</span><select id="serviceType" name="serviceType" required><option value="cenas">Cena romántica</option><option value="flores">Arreglos florales</option><option value="momentos">Momentos inolvidables</option></select></label>
           <label><span>Para cuántas personas</span><input id="servicePersons" name="servicePersons" type="number" min="1" value="2" required></label>
-
-          <div id="options-cenas" class="service-options-grid full-width">
-            <label><span>Tipo de cena</span><select name="dinnerType"><option value="romántica">Romántica</option><option value="familiar">Familiar</option><option value="amistosa">Amistosa</option></select></label>
-            <label><span>Solicitar transporte</span><select name="transport"><option value="No">No</option><option value="Sí">Sí</option></select></label>
-            <label class="full-width"><span>Locales disponibles o zona preferida</span><input name="venue" type="text" placeholder="Ejemplo: Miraflores, Barranco, local con vista" /></label>
-          </div>
-
-          <div id="options-flores" class="service-options-grid full-width is-hidden">
-            <label><span>Tipo de flor</span><select name="flowerType"><option value="rosas">Rosas</option><option value="girasoles">Girasoles</option><option value="tulipanes">Tulipanes</option><option value="orquídeas">Orquídeas</option><option value="mixtas">Mixtas</option></select></label>
-            <label><span>Incluir plantas</span><select name="plants"><option value="No">No</option><option value="Sí">Sí</option></select></label>
-            <label><span>Área a arreglar</span><input name="areaType" type="text" placeholder="Mesa, cuarto, sala, evento" /></label>
-            <label><span>Medidas del área</span><input name="areaSize" type="text" placeholder="Ejemplo: 3m x 2m" /></label>
-          </div>
-
-          <div id="options-momentos" class="service-options-grid full-width is-hidden">
-            <label><span>Tipo de experiencia</span><select name="momentType"><option value="sorpresa">Sorpresa</option><option value="día de campo">Día de campo</option><option value="tour">Tour</option><option value="crucero">Crucero</option></select></label>
-            <label><span>Servicio de limusina</span><select name="limousine"><option value="No">No</option><option value="Sí">Sí</option></select></label>
-            <label class="full-width"><span>Detalle adicional</span><input name="momentNote" type="text" placeholder="Ejemplo: paseo nocturno, decoración especial, ruta" /></label>
-          </div>
-
+          <div id="options-cenas" class="service-options-grid full-width"><label><span>Tipo de cena</span><select name="dinnerType"><option value="romántica">Romántica</option><option value="familiar">Familiar</option><option value="amistosa">Amistosa</option></select></label><label><span>Solicitar transporte</span><select name="transport"><option value="No">No</option><option value="Sí">Sí</option></select></label><label class="full-width"><span>Locales disponibles o zona preferida</span><input name="venue" type="text" placeholder="Ejemplo: Miraflores, Barranco, local con vista" /></label></div>
+          <div id="options-flores" class="service-options-grid full-width is-hidden"><label><span>Tipo de flor</span><select name="flowerType"><option value="rosas">Rosas</option><option value="girasoles">Girasoles</option><option value="tulipanes">Tulipanes</option><option value="orquídeas">Orquídeas</option><option value="mixtas">Mixtas</option></select></label><label><span>Incluir plantas</span><select name="plants"><option value="No">No</option><option value="Sí">Sí</option></select></label><label><span>Área a arreglar</span><input name="areaType" type="text" placeholder="Mesa, cuarto, sala, evento" /></label><label><span>Medidas del área</span><input name="areaSize" type="text" placeholder="Ejemplo: 3m x 2m" /></label></div>
+          <div id="options-momentos" class="service-options-grid full-width is-hidden"><label><span>Tipo de experiencia</span><select name="momentType"><option value="sorpresa">Sorpresa</option><option value="día de campo">Día de campo</option><option value="tour">Tour</option><option value="crucero">Crucero</option></select></label><label><span>Servicio de limusina</span><select name="limousine"><option value="No">No</option><option value="Sí">Sí</option></select></label><label class="full-width"><span>Detalle adicional</span><input name="momentNote" type="text" placeholder="Ejemplo: paseo nocturno, decoración especial, ruta" /></label></div>
           <label><span>Día inicio</span><input name="startDate" type="date" required></label>
           <label><span>Día final</span><input name="endDate" type="date" required></label>
           <label><span>Nombre y apellido</span><input name="fullName" type="text" placeholder="Nombre completo" required></label>
@@ -154,17 +117,13 @@
           <label><span>Correo</span><input name="email" type="email" placeholder="Correo" required></label>
           <label class="full-width"><span>Número</span><input name="phone" type="tel" placeholder="Celular o teléfono" required></label>
         </div>
-        <div class="reserve-summary">
-          <div><span>Total del servicio</span><strong id="serviceTotal">S/ 0.00</strong></div>
-          <div><span>Reservar con 50%</span><strong id="serviceReserve">S/ 0.00</strong></div>
-        </div>
+        <div class="reserve-summary"><div><span>Total del servicio</span><strong id="serviceTotal">S/ 0.00</strong></div><div><span>Reservar con 50%</span><strong id="serviceReserve">S/ 0.00</strong></div></div>
         <button type="submit">Agregar reserva al carrito</button>
       </form>
     </section>
   </main>
 
   <div id="ui-toast" class="ui-toast" aria-live="polite"></div>
-
   <footer id="footer-info"><p>© 2026 Amor & Detalles. Diseñado para celebrar el amor.</p></footer>
   <script src="app.js"></script>
 </body>
