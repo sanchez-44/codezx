@@ -93,13 +93,17 @@ body {
   left: 0;
   width: 100%;
   padding: 20px 8%;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   background: rgba(111, 42, 70, 0.58);
   backdrop-filter: blur(12px);
   z-index: 2000;
   box-shadow: 0 8px 24px rgba(72, 29, 46, 0.16);
+}
+
+.navbar::after {
+  content: "";
 }
 
 .logo {
@@ -108,6 +112,7 @@ body {
   gap: 12px;
   font-size: 24px;
   font-weight: 700;
+  justify-self: start;
 }
 
 .logo img {
@@ -123,6 +128,7 @@ body {
   display: flex;
   align-items: center;
   gap: 24px;
+  justify-self: center;
 }
 
 .nav-menu > li {
@@ -154,7 +160,7 @@ body {
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 14px);
-  left: 0;
+  left: 50%;
   min-width: 250px;
   background: rgba(255, 248, 251, 0.94);
   border-radius: 18px;
@@ -165,7 +171,7 @@ body {
   gap: 6px;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
+  transform: translate(-50%, 10px);
   transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
 }
 
@@ -181,10 +187,11 @@ body {
   color: #8f4562;
 }
 
-.dropdown:hover .dropdown-menu {
+.dropdown:hover > .dropdown-menu,
+.dropdown:focus-within > .dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translate(-50%, 0);
 }
 
 .mega-menu {
@@ -498,6 +505,21 @@ footer {
     padding: 10px 6%;
   }
 
+  .navbar {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 14px;
+  }
+
+  .navbar::after {
+    display: none;
+  }
+
+  .logo,
+  .nav-menu {
+    justify-self: center;
+  }
+
   .cards,
   .gallery-grid,
   .category-grid,
@@ -514,14 +536,13 @@ footer {
   .dropdown-menu,
   .mega-menu {
     min-width: 240px;
+    left: 50%;
   }
 }
 
 @media (max-width: 768px) {
   .navbar {
     top: 88px;
-    flex-direction: column;
-    gap: 15px;
     padding: 16px 6%;
   }
 
@@ -532,18 +553,17 @@ footer {
   }
 
   .dropdown-menu {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    margin-top: 8px;
-    box-shadow: none;
-    background: rgba(255, 245, 250, 0.9);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 10px);
+    margin-top: 0;
+    box-shadow: 0 14px 35px rgba(66, 7, 37, 0.14);
+    background: rgba(255, 245, 250, 0.96);
   }
 
-  .dropdown {
-    width: 100%;
-    text-align: center;
+  .dropdown:hover > .dropdown-menu,
+  .dropdown:focus-within > .dropdown-menu {
+    transform: translate(-50%, 0);
   }
 
   .hero-content {
