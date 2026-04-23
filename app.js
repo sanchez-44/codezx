@@ -31,9 +31,16 @@ const SERVICES = {
 };
 
 const SERVICE_DETAILS = {
-  cenas: { description: "Creamos experiencias íntimas y personalizadas con ambientación especial, transporte opcional y selección del tipo de cena.", specs:[["Tipo de servicio","Cena romántica"],["Modalidades","Romántica, familiar, amistosa"],["Transporte","Opcional"],["Locales","Sujetos a disponibilidad"]], conditions:["Reserva con 50% del monto.","La fecha queda sujeta a disponibilidad.","La confirmación final se coordina por WhatsApp o correo."] },
-  flores: { description: "Diseñamos arreglos para mesas, cuartos, salas o eventos, con elección de flor, plantas y medidas del área.", specs:[["Tipo de servicio","Arreglo floral"],["Flores","Rosas, girasoles, tulipanes, orquídeas"],["Plantas","Opcional"],["Área","Mesa, cuarto, sala o evento"]], conditions:["Las flores dependen de stock y temporada.","Se recomienda indicar medidas exactas.","Reserva con 50% del monto."] },
-  momentos: { description: "Preparamos experiencias memorables como sorpresa, día de campo, tour, crucero y opción de limusina.", specs:[["Tipo de servicio","Experiencia especial"],["Modalidades","Sorpresa, día de campo, tour, crucero"],["Limusina","Opcional"],["Coordinación","Personalizada"]], conditions:["La logística se confirma según servicio elegido.","Reserva con 50% del monto.","La empresa coordina detalles finales antes de la fecha."] }
+  cenas: { description: "Creamos experiencias íntimas y personalizadas con ambientación especial, transporte opcional y selección del tipo de cena.", specs:[["Tipo de servicio","Cena romántica"],["Modalidades","Romántica, familiar, amistosa"],["Limusina","Opcional con costo por km"],["Locales","San Isidro, Miraflores, Surco, Surquillo, Lince y Chorrillos"]], conditions:["Reserva con 50% del monto.","La fecha y hora quedan sujetas a disponibilidad.","La confirmación final se coordina por WhatsApp o correo."] },
+  flores: { description: "Diseñamos arreglos para mesas, cuartos, salas o eventos, con elección de flor, plantas y medidas del área.", specs:[["Tipo de servicio","Arreglo floral"],["Flores","Rosas, girasoles, tulipanes, orquídeas"],["Plantas","Opcional con costo adicional"],["Precio","Calculado según medidas del área"]], conditions:["Las flores dependen de stock y temporada.","Se recomienda indicar medidas exactas.","Reserva con 50% del monto."] },
+  momentos: { description: "Preparamos experiencias memorables como sorpresa, día de campo, tour, crucero y opción de limusina.", specs:[["Tipo de servicio","Experiencia especial"],["Modalidades","Sorpresa, día de campo, tour, crucero"],["Limusina","Opcional"],["Asesor","Disponible para coordinar"]], conditions:["La logística se confirma según servicio elegido.","Reserva con 50% del monto.","La empresa coordina detalles finales antes de la fecha."] }
+};
+
+const MOMENT_AVAILABILITY = {
+  sorpresa: "Disponibilidad sugerida: todos los días desde las 6:00 p. m. en Miraflores, Surco y San Isidro.",
+  "día de campo": "Disponibilidad sugerida: sábados y domingos desde las 10:00 a. m. en Chorrillos, Lurín y Pachacámac.",
+  tour: "Disponibilidad sugerida: viernes a domingo con salidas a las 3:00 p. m. y 7:00 p. m. por Miraflores, Barranco y Centro de Lima.",
+  crucero: "Disponibilidad sugerida: viernes y sábados, embarque 7:30 p. m. en La Punta y ruta hacia la bahía del Callao con retorno 10:30 p. m."
 };
 
 function getCart() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch { return []; } }
@@ -41,6 +48,7 @@ function saveCart(cart) { localStorage.setItem(STORE_KEY, JSON.stringify(cart));
 function money(value) { return new Intl.NumberFormat("es-PE", { style: "currency", currency: "PEN" }).format(value); }
 function queryParam(name) { return new URLSearchParams(window.location.search).get(name); }
 function resolveAsset(path) { return document.body.dataset.assetPrefix === "../" ? `../${path}` : path; }
+function parseAreaSize(text) { const nums = String(text || "").match(/[\d.]+/g) || []; if (nums.length >= 2) return Number(nums[0]) * Number(nums[1]); if (nums.length === 1) return Number(nums[0]); return 0; }
 
 function updateCartIndicators() {
   const cart = getCart();
@@ -70,9 +78,33 @@ function addConfiguredProduct(data) {
 }
 
 function getServiceExtraDetails(serviceKey, formData) {
-  if (serviceKey === "cenas") return { tipoCena: `Tipo de cena: ${formData.get("dinnerType") || "romántica"}`, transporte: `Transporte: ${formData.get("transport") || "No"}`, localPreferido: `Local o zona: ${formData.get("venue") || "No especificado"}` };
-  if (serviceKey === "flores") return { florPrincipal: `Flor principal: ${formData.get("flowerType") || "rosas"}`, incluirPlantas: `Incluir plantas: ${formData.get("plants") || "No"}`, areaArreglo: `Área: ${formData.get("areaType") || "No especificada"}`, medidasArea: `Medidas: ${formData.get("areaSize") || "No especificadas"}` };
-  if (serviceKey === "momentos") return { tipoExperiencia: `Experiencia: ${formData.get("momentType") || "sorpresa"}`, limusina: `Limusina: ${formData.get("limousine") || "No"}`, detalleAdicional: `Detalle: ${formData.get("momentNote") || "Sin detalle adicional"}` };
+  if (serviceKey === "cenas") {
+    return {
+      tipoCena: `Tipo de cena: ${formData.get("dinnerType") || "romántica"}`,
+      limusina: `Limusina: ${formData.get("transport") || "No"}`,
+      zona: `Zona elegida: ${formData.get("venue") || "No especificado"}`,
+      espera: `Punto de espera: ${formData.get("pickupLocation") || "No especificado"}`,
+      km: `Km estimados: ${formData.get("limoKm") || "0"}`,
+      detalle: `Detalle de cena: ${formData.get("dinnerNote") || "Sin detalle adicional"}`
+    };
+  }
+  if (serviceKey === "flores") {
+    return {
+      florPrincipal: `Flor principal: ${formData.get("flowerType") || "rosas"}`,
+      incluirPlantas: `Incluir plantas: ${formData.get("plants") || "No"}`,
+      areaArreglo: `Área: ${formData.get("areaType") || "No especificada"}`,
+      medidasArea: `Medidas: ${formData.get("areaSize") || "No especificadas"}`
+    };
+  }
+  if (serviceKey === "momentos") {
+    return {
+      tipoExperiencia: `Experiencia: ${formData.get("momentType") || "sorpresa"}`,
+      limusina: `Limusina: ${formData.get("limousine") || "No"}`,
+      asesor: `Contactar con asesor: ${formData.get("advisorContact") || "No"}`,
+      disponibilidad: MOMENT_AVAILABILITY[formData.get("momentType")] || "Disponibilidad sujeta a confirmación.",
+      detalleAdicional: `Detalle: ${formData.get("momentNote") || "Sin detalle adicional"}`
+    };
+  }
   return {};
 }
 
@@ -81,14 +113,39 @@ function formatDetails(details) {
   return Object.values(details).filter(Boolean).map((value) => `<span>${String(value)}</span>`).join("");
 }
 
+function calculateServiceTotal(serviceKey, form) {
+  const persons = Math.max(1, Number(form.querySelector("#servicePersons")?.value || 1));
+  if (serviceKey === "cenas") {
+    const base = SERVICES.cenas.price * persons;
+    const wantsLimo = form.querySelector("#transportSelect")?.value === "Sí";
+    const km = Math.max(0, Number(form.querySelector("#limoKm")?.value || 0));
+    const limoCost = wantsLimo ? km * 6 : 0;
+    return { total: base + limoCost, info: [`Cena base por ${persons} persona(s): ${money(base)}`, wantsLimo ? `Limusina: S/ 6.00 por km × ${km} km = ${money(limoCost)}` : `Sin limusina adicional`, `Zona disponible: ${form.querySelector("select[name='venue']")?.value || "No especificada"}`] };
+  }
+  if (serviceKey === "flores") {
+    const flowerType = form.querySelector("#flowerType")?.value || "rosas";
+    const includePlants = form.querySelector("#plantsSelect")?.value === "Sí";
+    const area = parseAreaSize(form.querySelector("#areaSize")?.value);
+    const rateMap = { rosas: 32, girasoles: 26, tulipanes: 30, orquídeas: 36, mixtas: 28 };
+    const base = 70;
+    const areaCost = area * (rateMap[flowerType] || 28);
+    const plantCost = includePlants ? Math.max(35, area * 6) : 0;
+    return { total: base + areaCost + plantCost, info: [`Base de montaje: ${money(base)}`, `Área estimada: ${area.toFixed(2)} m²`, `Decoración floral (${flowerType}): ${money(areaCost)}`, includePlants ? `Plantas adicionales: ${money(plantCost)}` : `Sin plantas adicionales`] };
+  }
+  const momentType = form.querySelector("#momentType")?.value || "sorpresa";
+  const baseMap = { sorpresa: 160, "día de campo": 140, tour: 220, crucero: 320 };
+  const wantsLimo = form.querySelector("#limousineSelect")?.value === "Sí";
+  const base = (baseMap[momentType] || 160) * persons;
+  const limoCost = wantsLimo ? 140 : 0;
+  return { total: base + limoCost, info: [`Experiencia ${momentType}: ${money(base)}`, wantsLimo ? `Servicio de limusina: ${money(limoCost)}` : `Sin servicio de limusina`, MOMENT_AVAILABILITY[momentType] || "Disponibilidad sujeta a confirmación."] };
+}
+
 function addServiceReservation(data) {
   const service = SERVICES[data.serviceKey];
   if (!service) return;
-  const persons = Number(data.persons) || 1;
-  const total = service.price * persons;
-  const reserve = total * 0.5;
+  const reserve = data.total * 0.5;
   const cart = getCart();
-  cart.push({ id: `${service.id}-${Date.now()}`, type: "service", name: `${service.name} (${persons} persona${persons > 1 ? "s" : ""})`, price: total, quantity: 1, total, reserve, image: service.image, details: { personas: `Personas: ${persons}`, fechaInicio: `Inicio: ${data.startDate}`, fechaFin: `Fin: ${data.endDate}`, titular: `Titular: ${data.fullName}`, dni: `DNI: ${data.dni}`, distrito: `Distrito: ${data.district}`, correo: `Correo: ${data.email}`, telefono: `Número: ${data.phone}`, ...data.extraDetails } });
+  cart.push({ id: `${service.id}-${Date.now()}`, type: "service", name: `${service.name} (${data.persons} ${data.serviceKey === "flores" ? "ambiente(s)" : `persona${data.persons > 1 ? "s" : ""}`})`, price: data.total, quantity: 1, total: data.total, reserve, image: service.image, details: { fecha: `Fecha: ${data.serviceDate}`, hora: `Hora: ${data.serviceTime}`, titular: `Titular: ${data.fullName}`, dni: `DNI: ${data.dni}`, distrito: `Distrito: ${data.district}`, correo: `Correo: ${data.email}`, telefono: `Número: ${data.phone}`, ...data.extraDetails } });
   saveCart(cart); showToast(`Reserva de ${service.name} agregada al carrito.`);
 }
 
@@ -152,7 +209,7 @@ function renderServiceDetailPage() {
   document.querySelector("#service-description").textContent = extra.description;
   document.querySelector("#service-image").src = resolveAsset(service.image);
   document.querySelector("#service-image").alt = service.name;
-  document.querySelector("#service-price").textContent = `Desde ${money(service.price)} por persona`;
+  document.querySelector("#service-price").textContent = `Desde ${money(service.price)} ${id === "flores" ? "base" : "por persona"}`;
   document.querySelector("#service-specs").innerHTML = extra.specs.map((row) => `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`).join("");
   document.querySelector("#service-conditions").innerHTML = extra.conditions.map((item) => `<p>${item}</p>`).join("");
   document.querySelector("#service-reserve-link").href = `../servicios.html#service-booking`;
@@ -169,6 +226,25 @@ function toggleServiceOptionGroups(selected) {
   if (active) active.classList.remove("is-hidden");
 }
 
+function updateServiceLabels(serviceKey, form) {
+  const personsLabel = form.querySelector("#servicePersonsLabel");
+  const dateLabel = form.querySelector("#serviceDateLabel");
+  const timeLabel = form.querySelector("#serviceTimeLabel");
+  if (serviceKey === "cenas") {
+    personsLabel.textContent = "Para cuántas personas";
+    dateLabel.textContent = "Fecha de reservación";
+    timeLabel.textContent = "Hora de reservación";
+  } else if (serviceKey === "flores") {
+    personsLabel.textContent = "Cantidad de ambientes";
+    dateLabel.textContent = "Día del servicio";
+    timeLabel.textContent = "Hora del servicio";
+  } else {
+    personsLabel.textContent = "Para cuántas personas";
+    dateLabel.textContent = "Fecha disponible";
+    timeLabel.textContent = "Hora disponible";
+  }
+}
+
 function bindServiceForm() {
   const form = document.querySelector("#service-booking-form");
   if (!form) return;
@@ -176,9 +252,47 @@ function bindServiceForm() {
   const persons = form.querySelector("#servicePersons");
   const totalField = form.querySelector("#serviceTotal");
   const reserveField = form.querySelector("#serviceReserve");
-  function recalc() { const service = SERVICES[select.value]; const qty = Math.max(1, Number(persons.value) || 1); const total = service ? service.price * qty : 0; const reserve = total * 0.5; if (totalField) totalField.textContent = money(total); if (reserveField) reserveField.textContent = money(reserve); toggleServiceOptionGroups(select.value); }
-  select?.addEventListener("change", recalc); persons?.addEventListener("input", recalc); recalc();
-  form.addEventListener("submit", (e) => { e.preventDefault(); const formData = new FormData(form); addServiceReservation({ serviceKey: formData.get("serviceType"), persons: formData.get("servicePersons"), startDate: formData.get("startDate"), endDate: formData.get("endDate"), fullName: formData.get("fullName"), dni: formData.get("dni"), district: formData.get("district"), email: formData.get("email"), phone: formData.get("phone"), extraDetails: getServiceExtraDetails(formData.get("serviceType"), formData) }); form.reset(); recalc(); });
+  const infoBox = form.querySelector("#serviceDynamicInfo");
+
+  function recalc() {
+    const serviceKey = select.value;
+    updateServiceLabels(serviceKey, form);
+    toggleServiceOptionGroups(serviceKey);
+    const calc = calculateServiceTotal(serviceKey, form);
+    const reserve = calc.total * 0.5;
+    totalField.textContent = money(calc.total);
+    reserveField.textContent = money(reserve);
+    infoBox.innerHTML = calc.info.map((line) => `<div><span>${line}</span></div>`).join("");
+  }
+
+  [select, persons, form.querySelector("#transportSelect"), form.querySelector("#limoKm"), form.querySelector("#flowerType"), form.querySelector("#plantsSelect"), form.querySelector("#areaSize"), form.querySelector("#momentType"), form.querySelector("#limousineSelect")].forEach((el) => {
+    if (el) el.addEventListener(el.tagName === "INPUT" ? "input" : "change", recalc);
+  });
+
+  recalc();
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const calc = calculateServiceTotal(formData.get("serviceType"), form);
+    addServiceReservation({
+      serviceKey: formData.get("serviceType"),
+      persons: Math.max(1, Number(formData.get("servicePersons") || 1)),
+      serviceDate: formData.get("serviceDate"),
+      serviceTime: formData.get("serviceTime"),
+      fullName: formData.get("fullName"),
+      dni: formData.get("dni"),
+      district: formData.get("district"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      total: calc.total,
+      extraDetails: getServiceExtraDetails(formData.get("serviceType"), formData)
+    });
+    form.reset();
+    form.querySelector("#servicePersons").value = 2;
+    if (form.querySelector("#limoKm")) form.querySelector("#limoKm").value = 0;
+    recalc();
+  });
 }
 
 function renderCartPage() {
