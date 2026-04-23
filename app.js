@@ -53,7 +53,7 @@ function addProduct(productId) {
   const product = PRODUCTS[productId];
   if (!product) return;
   const cart = getCart();
-  const existing = cart.find((item) => item.id === productId && item.type === "product");
+  const existing = cart.find((item) => item.id === productId && item.type === "product" && !item.details);
 
   if (existing) {
     existing.quantity += 1;
@@ -64,6 +64,32 @@ function addProduct(productId) {
 
   saveCart(cart);
   showToast(`${product.name} se añadió al carrito.`);
+}
+
+function addConfiguredProduct(data) {
+  const product = PRODUCTS[data.productId];
+  if (!product) return;
+
+  const quantity = Math.max(1, Number(data.quantity) || 1);
+  const details = data.details || {};
+  const detailText = Object.values(details).filter(Boolean).join(" · ");
+  const itemName = detailText ? `${product.name} (${detailText})` : product.name;
+
+  const cart = getCart();
+  cart.push({
+    id: `${product.id}-${Date.now()}`,
+    baseId: product.id,
+    type: "product",
+    name: itemName,
+    price: product.price,
+    quantity,
+    total: product.price * quantity,
+    image: data.image || product.image,
+    details
+  });
+
+  saveCart(cart);
+  showToast(`${product.name} configurado se añadió al carrito.`);
 }
 
 function getServiceExtraDetails(serviceKey, formData) {
@@ -95,14 +121,12 @@ function getServiceExtraDetails(serviceKey, formData) {
   return {};
 }
 
-function formatServiceDetails(details) {
+function formatDetails(details) {
   if (!details) return "";
-  const rows = [];
-  Object.entries(details).forEach(([key, value]) => {
-    if (!value) return;
-    rows.push(`<span>${String(value)}</span>`);
-  });
-  return rows.join("");
+  return Object.values(details)
+    .filter((value) => value !== undefined && value !== null && String(value).trim() !== "")
+    .map((value) => `<span>${String(value)}</span>`)
+    .join("");
 }
 
 function addServiceReservation(data) {
@@ -153,6 +177,45 @@ function showToast(message) {
 function bindProductButtons() {
   document.querySelectorAll("[data-add-product]").forEach((btn) => {
     btn.addEventListener("click", () => addProduct(btn.dataset.addProduct));
+  });
+}
+
+function bindDetailedProductPage() {
+  const form = document.querySelector("#product-detail-form");
+  if (!form) return;
+
+  const productId = form.dataset.productId;
+  const qtyInput = form.querySelector("#detailQuantity");
+  const totalBox = document.querySelector("#detailTotal");
+  const product = PRODUCTS[productId];
+
+  function recalcDetailTotal() {
+    if (!product || !qtyInput || !totalBox) return;
+    const quantity = Math.max(1, Number(qtyInput.value) || 1);
+    totalBox.textContent = money(product.price * quantity);
+  }
+
+  qtyInput?.addEventListener("input", recalcDetailTotal);
+  recalcDetailTotal();
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const fd = new FormData(form);
+    const details = {};
+    form.querySelectorAll("[data-detail-label]").forEach((field) => {
+      const label = field.dataset.detailLabel;
+      const value = fd.get(field.name);
+      if (label && value) {
+        details[label] = `${label}: ${value}`;
+      }
+    });
+
+    addConfiguredProduct({
+      productId,
+      quantity: fd.get("quantity"),
+      details,
+      image: form.dataset.productImage || undefined
+    });
   });
 }
 
@@ -246,7 +309,7 @@ function renderCartPage() {
       <div class="cart-item-info">
         <h3>${item.name}</h3>
         <p>${item.type === "service" ? "Servicio reservado" : "Producto"}</p>
-        ${item.type === "service" ? `<div class="service-detail-lines">${formatServiceDetails(item.details)}</div>` : ""}
+        ${item.details ? `<div class="service-detail-lines">${formatDetails(item.details)}</div>` : ""}
         ${item.reserve ? `<p class="reserve-note">Reserva del 50%: ${money(item.reserve)}</p>` : ""}
       </div>
       <div class="cart-item-controls">
@@ -311,6 +374,7 @@ function renderCartSummary() {
 document.addEventListener("DOMContentLoaded", () => {
   updateCartIndicators();
   bindProductButtons();
+  bindDetailedProductPage();
   bindServiceButtons();
   bindServiceForm();
   renderCartPage();
