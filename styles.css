@@ -25,13 +25,18 @@ body {
 }
 
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   padding: 20px 8%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(67, 4, 34, 0.35);
-  backdrop-filter: blur(4px);
+  background: rgba(67, 4, 34, 0.82);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  box-shadow: 0 6px 20px rgba(67, 4, 34, 0.22);
 }
 
 .logo {
@@ -68,7 +73,7 @@ body {
 
 .hero-content {
   max-width: 780px;
-  padding: 160px 8% 80px;
+  padding: 220px 8% 80px;
 }
 
 .tagline {
@@ -280,12 +285,17 @@ footer {
   .navbar {
     flex-direction: column;
     gap: 15px;
+    padding: 16px 6%;
   }
 
   .navbar ul {
     flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
+  }
+
+  .hero-content {
+    padding-top: 190px;
   }
 
   .hero-content h2 {
