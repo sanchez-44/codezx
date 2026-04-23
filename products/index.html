@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalle de producto | Amor & Detalles</title>
+  <link rel="icon" type="image/jpeg" href="../img/logo.jpeg" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body data-page="product-detail" data-asset-prefix="../">
+  <header class="subpage-header">
+    <div class="topbar">
+      <div class="topbar-text">Síguenos y contáctanos en nuestras plataformas</div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/brunoyosiney.sanchezibanez.1" target="_blank" rel="noopener noreferrer"><img src="../Flogo.jpg" alt="Facebook" /></a>
+        <a href="mailto:brunosanchez654@gmail.com"><img src="../GMlogo.png" alt="Gmail" /></a>
+        <a href="https://www.instagram.com/jsmith0980/" target="_blank" rel="noopener noreferrer"><img src="../IGlogo.avif" alt="Instagram" /></a>
+        <a href="https://www.tiktok.com/@laplace444" target="_blank" rel="noopener noreferrer"><img src="../TTlogo.avif" alt="TikTok" /></a>
+        <a href="https://wa.me/51940705646" target="_blank" rel="noopener noreferrer"><img src="../Wlogo.webp" alt="WhatsApp" /></a>
+        <a href="https://www.youtube.com/@brunosanchez2800" target="_blank" rel="noopener noreferrer"><img src="../YTlogo.avif" alt="YouTube" /></a>
+      </div>
+    </div>
+    <nav class="navbar">
+      <h1 class="logo"><img src="../img/logo.jpeg" alt="Logo Amor & Detalles" /><span>Amor & Detalles</span></h1>
+      <ul class="nav-menu">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="../tienda.html">Tienda</a></li>
+        <li><a href="../servicios.html">Servicios</a></li>
+        <li><a href="../contacto.html">Contactanos</a></li>
+        <li class="cart-link-item"><a href="../carrito.html" class="cart-link">Carrito <span class="cart-count">0</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="subpage-main">
+    <section class="section page-hero compact-hero">
+      <h2 id="detail-title">Producto</h2>
+      <p id="detail-description" class="section-text"></p>
+    </section>
+
+    <section class="section info-grid-section">
+      <div class="info-box">
+        <img id="detail-image" src="" alt="Producto" style="width:100%;border-radius:16px;max-height:420px;object-fit:cover;" />
+      </div>
+      <div class="info-box">
+        <h2>Opciones del producto</h2>
+        <div class="detail-price" id="detail-price"></div>
+        <div id="detail-form-wrap"></div>
+        <a class="btn related-link" href="../tienda.html">Volver a tienda</a>
+      </div>
+    </section>
+
+    <section class="section info-grid-section">
+      <div class="info-box">
+        <h2>Especificaciones</h2>
+        <table class="specs-table"><tbody id="detail-specs"></tbody></table>
+      </div>
+      <div class="info-box">
+        <h2>Condiciones</h2>
+        <div class="terms-list" id="detail-conditions"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="ui-toast" class="ui-toast" aria-live="polite"></div>
+  <footer id="footer-info"><p>© 2026 Amor & Detalles. Diseñado para celebrar el amor.</p></footer>
+  <script src="../app.js"></script>
+</body>
+</html>
