@@ -107,10 +107,15 @@ body {
   border: 2px solid rgba(255, 255, 255, 0.85);
 }
 
-.navbar ul {
+.nav-menu {
   list-style: none;
   display: flex;
+  align-items: center;
   gap: 24px;
+}
+
+.nav-menu > li {
+  position: relative;
 }
 
 .navbar a {
@@ -121,6 +126,72 @@ body {
 
 .navbar a:hover {
   color: #ffd4ea;
+}
+
+.dropdown > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dropdown > a::after {
+  content: "▾";
+  font-size: 12px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 0;
+  min-width: 250px;
+  background: rgba(255, 245, 250, 0.98);
+  border-radius: 18px;
+  box-shadow: 0 14px 35px rgba(66, 7, 37, 0.2);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+}
+
+.dropdown-menu a {
+  color: #7d0f42;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.dropdown-menu a:hover {
+  background: #ffe4f0;
+  color: #a11156;
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.mega-menu {
+  min-width: 760px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.dropdown-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dropdown-column h4 {
+  color: #9a0f4f;
+  font-size: 15px;
+  margin-bottom: 4px;
 }
 
 .hero-content {
@@ -326,6 +397,13 @@ footer {
   }
 }
 
+@media (max-width: 1100px) {
+  .mega-menu {
+    min-width: 620px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 900px) {
   .topbar {
     flex-direction: column;
@@ -333,8 +411,14 @@ footer {
   }
 
   .cards,
-  .gallery-grid {
+  .gallery-grid,
+  .mega-menu {
     grid-template-columns: 1fr;
+  }
+
+  .dropdown-menu,
+  .mega-menu {
+    min-width: 240px;
   }
 }
 
@@ -346,14 +430,29 @@ footer {
     padding: 16px 6%;
   }
 
-  .navbar ul {
+  .nav-menu {
     flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
   }
 
+  .dropdown-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    margin-top: 8px;
+    box-shadow: none;
+    background: rgba(255, 245, 250, 0.9);
+  }
+
+  .dropdown {
+    width: 100%;
+    text-align: center;
+  }
+
   .hero-content {
-    padding-top: 300px;
+    padding-top: 360px;
   }
 
   .hero-content h2 {
