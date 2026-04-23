@@ -66,6 +66,7 @@
             <a href="contacto.html#nosotros">Nosotros</a>
           </div>
         </li>
+        <li class="cart-link-item"><a href="carrito.html" class="cart-link">Carrito <span class="cart-count">0</span></a></li>
       </ul>
     </nav>
   </header>
@@ -73,27 +74,53 @@
   <main class="subpage-main">
     <section class="section page-hero compact-hero">
       <h2>Servicios</h2>
-      <p class="section-text">Creamos experiencias románticas, decoraciones y recuerdos inolvidables para fechas especiales.</p>
+      <p class="section-text">Contrata el servicio que más te guste, completa tus datos y reserva con el 50%.</p>
     </section>
 
     <section class="section">
       <div class="cards service-page-grid">
-        <article class="card" id="cenas-romanticas"><h3>Cenas románticas</h3><p>Montamos espacios íntimos y decorados con velas, flores, pétalos y detalles personalizados para una velada especial.</p></article>
-        <article class="card" id="arreglos-florales"><h3>Arreglos florales</h3><p>Diseñamos arreglos con rosas y flores decorativas para regalos, sorpresas, aniversarios y celebraciones románticas.</p></article>
-        <article class="card" id="momentos-inolvidables"><h3>Momentos inolvidables</h3><p>Preparamos ambientaciones y detalles visuales para sorprender con propuestas, regalos y celebraciones memorables.</p></article>
+        <article class="card" id="cenas-romanticas"><h3>Cena romántica</h3><p>Montamos espacios íntimos y decorados con velas, flores y detalles personalizados.</p><div class="service-meta"><strong>Desde S/ 180.00 por persona</strong></div><button class="btn" data-service-select="cenas">Contratar servicio</button></article>
+        <article class="card" id="arreglos-florales"><h3>Arreglos florales</h3><p>Diseñamos arreglos con rosas y flores decorativas para regalos y celebraciones.</p><div class="service-meta"><strong>Desde S/ 120.00 por persona</strong></div><button class="btn" data-service-select="flores">Contratar servicio</button></article>
+        <article class="card" id="momentos-inolvidables"><h3>Momentos inolvidables</h3><p>Preparamos ambientaciones y detalles visuales para sorprender con una experiencia memorable.</p><div class="service-meta"><strong>Desde S/ 160.00 por persona</strong></div><button class="btn" data-service-select="momentos">Contratar servicio</button></article>
       </div>
     </section>
 
-    <section class="section">
-      <h2>Galería de servicios</h2>
-      <div class="gallery-grid">
-        <figure class="gallery-item"><img src="img/cenaSV.jpeg" alt="Cena romántica" /><figcaption>Cenas románticas</figcaption></figure>
-        <figure class="gallery-item"><img src="img/confidencial.jpg" alt="Arreglos florales" /><figcaption>Arreglos florales</figcaption></figure>
-        <figure class="gallery-item"><img src="img/pareja.jpg" alt="Momentos inolvidables" /><figcaption>Momentos inolvidables</figcaption></figure>
+    <section id="service-booking" class="section booking-layout">
+      <div class="booking-copy">
+        <p class="booking-kicker">Reserva tu experiencia</p>
+        <h2>Contrata tu servicio aquí</h2>
+        <p>Selecciona el tipo de servicio, define la cantidad de personas, indica las fechas y completa los datos del titular. El sistema calculará automáticamente la reserva del 50%.</p>
+        <div class="booking-highlights">
+          <div><strong>Atención personalizada</strong><span>Te contactamos para confirmar.</span></div>
+          <div><strong>Reserva segura</strong><span>Separación con el 50% del monto.</span></div>
+        </div>
       </div>
+
+      <form id="service-booking-form" class="booking-form">
+        <h3>Formulario de reserva</h3>
+        <div class="form-grid two-cols">
+          <label><span>Tipo de servicio</span><select id="serviceType" name="serviceType" required><option value="cenas">Cena romántica</option><option value="flores">Arreglos florales</option><option value="momentos">Momentos inolvidables</option></select></label>
+          <label><span>Para cuántas personas</span><input id="servicePersons" name="servicePersons" type="number" min="1" value="2" required></label>
+          <label><span>Día inicio</span><input name="startDate" type="date" required></label>
+          <label><span>Día final</span><input name="endDate" type="date" required></label>
+          <label><span>Nombre y apellido</span><input name="fullName" type="text" placeholder="Nombre completo" required></label>
+          <label><span>DNI</span><input name="dni" type="text" placeholder="Documento" required></label>
+          <label><span>Distrito</span><input name="district" type="text" placeholder="Distrito" required></label>
+          <label><span>Correo</span><input name="email" type="email" placeholder="Correo" required></label>
+          <label class="full-width"><span>Número</span><input name="phone" type="tel" placeholder="Celular o teléfono" required></label>
+        </div>
+        <div class="reserve-summary">
+          <div><span>Total del servicio</span><strong id="serviceTotal">S/ 0.00</strong></div>
+          <div><span>Reservar con 50%</span><strong id="serviceReserve">S/ 0.00</strong></div>
+        </div>
+        <button type="submit">Agregar reserva al carrito</button>
+      </form>
     </section>
   </main>
 
+  <div id="ui-toast" class="ui-toast" aria-live="polite"></div>
+
   <footer id="footer-info"><p>© 2026 Amor & Detalles. Diseñado para celebrar el amor.</p></footer>
+  <script src="app.js"></script>
 </body>
 </html>
