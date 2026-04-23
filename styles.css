@@ -622,6 +622,16 @@ footer {
   grid-column: 1 / -1;
 }
 
+.service-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.is-hidden {
+  display: none;
+}
+
 .reserve-summary {
   margin: 22px 0;
   padding: 18px;
@@ -713,6 +723,14 @@ footer {
 .cart-item-info h3 {
   color: #8a5068;
   margin-bottom: 8px;
+}
+
+.service-detail-lines {
+  display: grid;
+  gap: 4px;
+  margin-top: 8px;
+  color: #7b4d5e;
+  font-size: 14px;
 }
 
 .reserve-note {
@@ -883,7 +901,8 @@ footer {
   .shop-grid,
   .booking-layout,
   .cart-layout,
-  .info-grid-section {
+  .info-grid-section,
+  .service-options-grid {
     grid-template-columns: 1fr;
   }
 
