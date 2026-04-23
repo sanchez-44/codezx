@@ -80,8 +80,8 @@
     <section class="section">
       <div class="cards service-page-grid">
         <article class="card" id="cenas-romanticas"><h3>Cena romántica</h3><p>Montamos espacios íntimos y decorados con velas, flores y detalles personalizados.</p><div class="service-meta"><strong>Desde S/ 180.00 por persona</strong></div><button class="btn" data-service-select="cenas">Contratar servicio</button></article>
-        <article class="card" id="arreglos-florales"><h3>Arreglos florales</h3><p>Diseñamos arreglos con rosas y flores decorativas para regalos y celebraciones.</p><div class="service-meta"><strong>Desde S/ 120.00 por persona</strong></div><button class="btn" data-service-select="flores">Contratar servicio</button></article>
-        <article class="card" id="momentos-inolvidables"><h3>Momentos inolvidables</h3><p>Preparamos ambientaciones y detalles visuales para sorprender con una experiencia memorable.</p><div class="service-meta"><strong>Desde S/ 160.00 por persona</strong></div><button class="btn" data-service-select="momentos">Contratar servicio</button></article>
+        <article class="card" id="arreglos-florales"><h3>Arreglos florales</h3><p>Diseñamos arreglos con rosas, follajes y plantas decorativas para regalos y celebraciones.</p><div class="service-meta"><strong>Desde S/ 120.00 por persona</strong></div><button class="btn" data-service-select="flores">Contratar servicio</button></article>
+        <article class="card" id="momentos-inolvidables"><h3>Momentos inolvidables</h3><p>Preparamos experiencias como sorpresa, día de campo, tour, crucero y servicio de limusina.</p><div class="service-meta"><strong>Desde S/ 160.00 por persona</strong></div><button class="btn" data-service-select="momentos">Contratar servicio</button></article>
       </div>
     </section>
 
@@ -90,9 +90,9 @@
         <h2>Especificaciones de servicios</h2>
         <table class="specs-table">
           <tr><th>Servicio</th><th>Incluye</th></tr>
-          <tr><td>Cena romántica</td><td>Ambientación, mesa decorada, velas, pétalos y detalles visuales.</td></tr>
-          <tr><td>Arreglos florales</td><td>Diseño floral personalizado, presentación y empaque de regalo.</td></tr>
-          <tr><td>Momentos inolvidables</td><td>Decoración temática, ambientación fotográfica y sorpresa visual.</td></tr>
+          <tr><td>Cena romántica</td><td>Tipo de cena romántica, familiar o amistosa, opción de transporte y consulta de locales disponibles.</td></tr>
+          <tr><td>Arreglos florales</td><td>Selección de flor principal, plantas decorativas, área a intervenir y medidas del espacio.</td></tr>
+          <tr><td>Momentos inolvidables</td><td>Experiencias tipo sorpresa, día de campo, tour, crucero y servicio opcional de limusina.</td></tr>
           <tr><td>Reservas</td><td>Separación con 50%, coordinación previa y confirmación por contacto.</td></tr>
           <tr><td>Atención</td><td>Servicio sujeto a fecha, cantidad de personas y disponibilidad.</td></tr>
         </table>
@@ -126,6 +126,26 @@
         <div class="form-grid two-cols">
           <label><span>Tipo de servicio</span><select id="serviceType" name="serviceType" required><option value="cenas">Cena romántica</option><option value="flores">Arreglos florales</option><option value="momentos">Momentos inolvidables</option></select></label>
           <label><span>Para cuántas personas</span><input id="servicePersons" name="servicePersons" type="number" min="1" value="2" required></label>
+
+          <div id="options-cenas" class="service-options-grid full-width">
+            <label><span>Tipo de cena</span><select name="dinnerType"><option value="romántica">Romántica</option><option value="familiar">Familiar</option><option value="amistosa">Amistosa</option></select></label>
+            <label><span>Solicitar transporte</span><select name="transport"><option value="No">No</option><option value="Sí">Sí</option></select></label>
+            <label class="full-width"><span>Locales disponibles o zona preferida</span><input name="venue" type="text" placeholder="Ejemplo: Miraflores, Barranco, local con vista" /></label>
+          </div>
+
+          <div id="options-flores" class="service-options-grid full-width is-hidden">
+            <label><span>Tipo de flor</span><select name="flowerType"><option value="rosas">Rosas</option><option value="girasoles">Girasoles</option><option value="tulipanes">Tulipanes</option><option value="orquídeas">Orquídeas</option><option value="mixtas">Mixtas</option></select></label>
+            <label><span>Incluir plantas</span><select name="plants"><option value="No">No</option><option value="Sí">Sí</option></select></label>
+            <label><span>Área a arreglar</span><input name="areaType" type="text" placeholder="Mesa, cuarto, sala, evento" /></label>
+            <label><span>Medidas del área</span><input name="areaSize" type="text" placeholder="Ejemplo: 3m x 2m" /></label>
+          </div>
+
+          <div id="options-momentos" class="service-options-grid full-width is-hidden">
+            <label><span>Tipo de experiencia</span><select name="momentType"><option value="sorpresa">Sorpresa</option><option value="día de campo">Día de campo</option><option value="tour">Tour</option><option value="crucero">Crucero</option></select></label>
+            <label><span>Servicio de limusina</span><select name="limousine"><option value="No">No</option><option value="Sí">Sí</option></select></label>
+            <label class="full-width"><span>Detalle adicional</span><input name="momentNote" type="text" placeholder="Ejemplo: paseo nocturno, decoración especial, ruta" /></label>
+          </div>
+
           <label><span>Día inicio</span><input name="startDate" type="date" required></label>
           <label><span>Día final</span><input name="endDate" type="date" required></label>
           <label><span>Nombre y apellido</span><input name="fullName" type="text" placeholder="Nombre completo" required></label>
