@@ -17,8 +17,7 @@ body {
 
 .hero {
   min-height: 100vh;
-  background: linear-gradient(rgba(252, 3, 127, 0.68), rgba(247, 5, 166, 0.952)), /*c51d34*/
-    url("img/svglob.jpeg");
+  background: linear-gradient(rgba(252, 3, 127, 0.68), rgba(247, 5, 166, 0.952)), url("img/svglob.jpeg");
   background-size: cover;
   background-position: center;
   color: #fff;
@@ -214,7 +213,8 @@ body {
   margin-bottom: 20px;
 }
 
-.hero-content p {
+.hero-content p,
+.section-text {
   font-size: 19px;
   margin-bottom: 30px;
 }
@@ -250,30 +250,73 @@ body {
   margin-bottom: 18px;
 }
 
-.cards {
+.cards,
+.gallery-grid,
+.category-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin-top: 25px;
 }
 
-.card {
+.card,
+.category-card,
+.product-block,
+.about-highlight {
   padding: 24px;
   border-radius: 16px;
   background: #fff0f7;
   border: 1px solid #ffd0e5;
 }
 
-.card h3 {
+.card h3,
+.product-block h3 {
   color: #8c0f49;
   margin-bottom: 10px;
 }
 
-.gallery-grid {
+.category-card {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(112, 11, 60, 0.14);
+}
+
+.category-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.category-card span {
+  font-weight: 700;
+  color: #8c0f49;
+}
+
+.product-sections {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin-top: 16px;
+}
+
+.product-block {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.product-block img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .gallery-item {
@@ -327,16 +370,26 @@ button:hover {
   background: #99114f;
 }
 
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 24px;
+}
+
+.about-highlight ul {
+  padding-left: 18px;
+}
+
+.about-highlight li + li {
+  margin-top: 8px;
+}
+
 footer {
   text-align: center;
   padding: 25px;
   background: #7d0f42;
   color: #fff;
 }
-
-/* ============================= */
-/* EFECTO DE ENTRADA SAN VALENTÍN */
-/* ============================= */
 
 .intro-effects {
   position: fixed;
@@ -412,7 +465,13 @@ footer {
 
   .cards,
   .gallery-grid,
-  .mega-menu {
+  .category-grid,
+  .mega-menu,
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-block {
     grid-template-columns: 1fr;
   }
 
