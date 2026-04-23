@@ -17,7 +17,7 @@ body {
 
 .hero {
   min-height: 100vh;
-  background: linear-gradient(rgba(138, 0, 67, 0.68), rgba(173, 10, 82, 0.68)),
+  background: linear-gradient(rgba(252, 3, 127, 0.68), rgba(247, 5, 166, 0.952)), /*c51d34*/
     url("img/svglob.jpeg");
   background-size: cover;
   background-position: center;
