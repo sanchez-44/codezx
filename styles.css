@@ -206,6 +206,69 @@ footer {
   color: #fff;
 }
 
+/* ============================= */
+/* EFECTO DE ENTRADA SAN VALENTÍN */
+/* ============================= */
+
+.intro-effects {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 1;
+  background: radial-gradient(circle at center, rgba(255, 192, 203, 0.12), rgba(255, 255, 255, 0));
+  transition: opacity 0.8s ease;
+}
+
+.intro-effects.fade-out {
+  opacity: 0;
+}
+
+.effect-item,
+.burst-particle {
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.35));
+}
+
+.effect-item {
+  font-size: clamp(24px, 3vw, 42px);
+  animation: floatIntro linear forwards;
+}
+
+.burst-particle {
+  font-size: clamp(18px, 2.4vw, 30px);
+  animation: burstIntro 1.4s ease-out forwards;
+}
+
+@keyframes floatIntro {
+  0% {
+    transform: translateY(60px) scale(0.4) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1.2) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes burstIntro {
+  0% {
+    transform: translate(0, 0) scale(0.4);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(1.1) rotate(360deg);
+    opacity: 0;
+  }
+}
+
 @media (max-width: 900px) {
   .cards,
   .gallery-grid {
