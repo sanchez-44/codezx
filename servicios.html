@@ -59,39 +59,14 @@
   <main class="subpage-main">
     <section class="section page-hero compact-hero">
       <h2>Servicios</h2>
-      <p class="section-text">Contrata el servicio que más te guste, completa tus datos y reserva con el 50%.</p>
+      <p class="section-text">Contrata el servicio que más te guste y el sistema mostrará campos, disponibilidad y costos según la opción elegida.</p>
     </section>
 
     <section class="section">
       <div class="cards service-page-grid">
         <article class="card" id="cenas-romanticas"><h3><a href="services/index.html?id=cenas">Cena romántica</a></h3><p>Montamos espacios íntimos y decorados con velas, flores y detalles personalizados.</p><div class="service-meta"><strong>Desde S/ 180.00 por persona</strong></div><a class="btn" href="services/index.html?id=cenas">Ver detalle</a></article>
-        <article class="card" id="arreglos-florales"><h3><a href="services/index.html?id=flores">Arreglos florales</a></h3><p>Diseñamos arreglos con rosas, follajes y plantas decorativas para regalos y celebraciones.</p><div class="service-meta"><strong>Desde S/ 120.00 por persona</strong></div><a class="btn" href="services/index.html?id=flores">Ver detalle</a></article>
+        <article class="card" id="arreglos-florales"><h3><a href="services/index.html?id=flores">Arreglos florales</a></h3><p>Diseñamos arreglos con rosas, follajes y plantas decorativas para regalos y celebraciones.</p><div class="service-meta"><strong>Desde S/ 120.00 base</strong></div><a class="btn" href="services/index.html?id=flores">Ver detalle</a></article>
         <article class="card" id="momentos-inolvidables"><h3><a href="services/index.html?id=momentos">Momentos inolvidables</a></h3><p>Preparamos experiencias como sorpresa, día de campo, tour, crucero y servicio de limusina.</p><div class="service-meta"><strong>Desde S/ 160.00 por persona</strong></div><a class="btn" href="services/index.html?id=momentos">Ver detalle</a></article>
-      </div>
-    </section>
-
-    <section class="section info-grid-section">
-      <div class="info-box">
-        <h2>Especificaciones de servicios</h2>
-        <table class="specs-table">
-          <tr><th>Servicio</th><th>Incluye</th></tr>
-          <tr><td>Cena romántica</td><td>Tipo de cena romántica, familiar o amistosa, opción de transporte y consulta de locales disponibles.</td></tr>
-          <tr><td>Arreglos florales</td><td>Selección de flor principal, plantas decorativas, área a intervenir y medidas del espacio.</td></tr>
-          <tr><td>Momentos inolvidables</td><td>Experiencias tipo sorpresa, día de campo, tour, crucero y servicio opcional de limusina.</td></tr>
-          <tr><td>Reservas</td><td>Separación con 50%, coordinación previa y confirmación por contacto.</td></tr>
-          <tr><td>Atención</td><td>Servicio sujeto a fecha, cantidad de personas y disponibilidad.</td></tr>
-        </table>
-      </div>
-
-      <div class="info-box">
-        <h2>Términos y condiciones</h2>
-        <div class="terms-list">
-          <p><strong>Reserva:</strong> para confirmar un servicio se requiere un abono inicial del 50%.</p>
-          <p><strong>Fechas:</strong> las solicitudes están sujetas a disponibilidad del calendario y capacidad operativa.</p>
-          <p><strong>Cambios:</strong> reprogramaciones deben solicitarse con anticipación para poder ser evaluadas.</p>
-          <p><strong>Personalización:</strong> el contenido final puede variar según requerimientos, presupuesto y stock decorativo.</p>
-          <p><strong>Confirmación:</strong> la empresa coordinará detalles finales por WhatsApp o correo antes de la ejecución.</p>
-        </div>
       </div>
     </section>
 
@@ -99,24 +74,50 @@
       <div class="booking-copy">
         <p class="booking-kicker">Reserva tu experiencia</p>
         <h2>Contrata tu servicio aquí</h2>
-        <p>Selecciona el tipo de servicio, define la cantidad de personas, indica las fechas y completa los datos del titular. El sistema calculará automáticamente la reserva del 50%.</p>
+        <p>Selecciona el tipo de servicio y verás opciones especiales, horarios, costos calculados y disponibilidad sugerida.</p>
+        <div class="booking-highlights">
+          <div><strong>Atención personalizada</strong><span>Te contactamos para confirmar cada detalle.</span></div>
+          <div><strong>Reserva segura</strong><span>Separación con el 50% del monto.</span></div>
+        </div>
       </div>
       <form id="service-booking-form" class="booking-form">
         <h3>Formulario de reserva</h3>
         <div class="form-grid two-cols">
           <label><span>Tipo de servicio</span><select id="serviceType" name="serviceType" required><option value="cenas">Cena romántica</option><option value="flores">Arreglos florales</option><option value="momentos">Momentos inolvidables</option></select></label>
-          <label><span>Para cuántas personas</span><input id="servicePersons" name="servicePersons" type="number" min="1" value="2" required></label>
-          <div id="options-cenas" class="service-options-grid full-width"><label><span>Tipo de cena</span><select name="dinnerType"><option value="romántica">Romántica</option><option value="familiar">Familiar</option><option value="amistosa">Amistosa</option></select></label><label><span>Solicitar transporte</span><select name="transport"><option value="No">No</option><option value="Sí">Sí</option></select></label><label class="full-width"><span>Locales disponibles o zona preferida</span><input name="venue" type="text" placeholder="Ejemplo: Miraflores, Barranco, local con vista" /></label></div>
-          <div id="options-flores" class="service-options-grid full-width is-hidden"><label><span>Tipo de flor</span><select name="flowerType"><option value="rosas">Rosas</option><option value="girasoles">Girasoles</option><option value="tulipanes">Tulipanes</option><option value="orquídeas">Orquídeas</option><option value="mixtas">Mixtas</option></select></label><label><span>Incluir plantas</span><select name="plants"><option value="No">No</option><option value="Sí">Sí</option></select></label><label><span>Área a arreglar</span><input name="areaType" type="text" placeholder="Mesa, cuarto, sala, evento" /></label><label><span>Medidas del área</span><input name="areaSize" type="text" placeholder="Ejemplo: 3m x 2m" /></label></div>
-          <div id="options-momentos" class="service-options-grid full-width is-hidden"><label><span>Tipo de experiencia</span><select name="momentType"><option value="sorpresa">Sorpresa</option><option value="día de campo">Día de campo</option><option value="tour">Tour</option><option value="crucero">Crucero</option></select></label><label><span>Servicio de limusina</span><select name="limousine"><option value="No">No</option><option value="Sí">Sí</option></select></label><label class="full-width"><span>Detalle adicional</span><input name="momentNote" type="text" placeholder="Ejemplo: paseo nocturno, decoración especial, ruta" /></label></div>
-          <label><span>Día inicio</span><input name="startDate" type="date" required></label>
-          <label><span>Día final</span><input name="endDate" type="date" required></label>
+          <label><span id="servicePersonsLabel">Para cuántas personas</span><input id="servicePersons" name="servicePersons" type="number" min="1" value="2" required></label>
+
+          <div id="options-cenas" class="service-options-grid full-width">
+            <label><span>Tipo de cena</span><select name="dinnerType"><option value="romántica">Romántica</option><option value="familiar">Familiar</option><option value="amistosa">Amistosa</option></select></label>
+            <label><span>Solicitar limusina</span><select id="transportSelect" name="transport"><option value="No">No</option><option value="Sí">Sí</option></select></label>
+            <label><span>Local o zona preferida</span><select name="venue"><option value="San Isidro">San Isidro</option><option value="Miraflores">Miraflores</option><option value="Surco">Surco</option><option value="Surquillo">Surquillo</option><option value="Lince">Lince</option><option value="Chorrillos">Chorrillos</option></select></label>
+            <label><span>Punto donde esperará la limusina</span><input id="pickupLocation" name="pickupLocation" type="text" placeholder="Dirección o referencia" /></label>
+            <label><span>Distancia estimada en km</span><input id="limoKm" name="limoKm" type="number" min="0" step="1" value="0" /></label>
+            <label class="full-width"><span>Detalle de cómo quiere la cena</span><textarea name="dinnerNote" rows="3" placeholder="Ejemplo: velas, flores blancas, música suave, vista al mar"></textarea></label>
+          </div>
+
+          <div id="options-flores" class="service-options-grid full-width is-hidden">
+            <label><span>Tipo de flor</span><select id="flowerType" name="flowerType"><option value="rosas">Rosas</option><option value="girasoles">Girasoles</option><option value="tulipanes">Tulipanes</option><option value="orquídeas">Orquídeas</option><option value="mixtas">Mixtas</option></select></label>
+            <label><span>Incluir plantas</span><select id="plantsSelect" name="plants"><option value="No">No</option><option value="Sí">Sí</option></select></label>
+            <label><span>Área a arreglar</span><input name="areaType" type="text" placeholder="Mesa, cuarto, local, sala" /></label>
+            <label><span>Medidas del área</span><input id="areaSize" name="areaSize" type="text" placeholder="Ejemplo: 3 x 2" /></label>
+          </div>
+
+          <div id="options-momentos" class="service-options-grid full-width is-hidden">
+            <label><span>Tipo de experiencia</span><select id="momentType" name="momentType"><option value="sorpresa">Sorpresa</option><option value="día de campo">Día de campo</option><option value="tour">Tour</option><option value="crucero">Crucero</option></select></label>
+            <label><span>Servicio de limusina</span><select id="limousineSelect" name="limousine"><option value="No">No</option><option value="Sí">Sí</option></select></label>
+            <label><span>Contactar con un asesor</span><select name="advisorContact"><option value="No">No</option><option value="Sí">Sí</option></select></label>
+            <label class="full-width"><span>Detalle adicional</span><input name="momentNote" type="text" placeholder="Ejemplo: sorpresa elegante, paseo nocturno, ruta especial" /></label>
+          </div>
+
+          <label><span id="serviceDateLabel">Fecha del servicio</span><input id="serviceDate" name="serviceDate" type="date" required></label>
+          <label><span id="serviceTimeLabel">Hora del servicio</span><input id="serviceTime" name="serviceTime" type="time" required></label>
           <label><span>Nombre y apellido</span><input name="fullName" type="text" placeholder="Nombre completo" required></label>
           <label><span>DNI</span><input name="dni" type="text" placeholder="Documento" required></label>
           <label><span>Distrito</span><input name="district" type="text" placeholder="Distrito" required></label>
           <label><span>Correo</span><input name="email" type="email" placeholder="Correo" required></label>
           <label class="full-width"><span>Número</span><input name="phone" type="tel" placeholder="Celular o teléfono" required></label>
         </div>
+        <div id="serviceDynamicInfo" class="reserve-summary"></div>
         <div class="reserve-summary"><div><span>Total del servicio</span><strong id="serviceTotal">S/ 0.00</strong></div><div><span>Reservar con 50%</span><strong id="serviceReserve">S/ 0.00</strong></div></div>
         <button type="submit">Agregar reserva al carrito</button>
       </form>
