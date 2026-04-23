@@ -468,7 +468,6 @@ footer {
   animation: burstIntro 1.4s ease-out forwards;
 }
 
-/* NUEVAS SECCIONES: TIENDA, RESERVA Y CARRITO */
 .shop-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -637,6 +636,49 @@ footer {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+}
+
+.info-grid-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.info-box {
+  background: rgba(255, 248, 251, 0.96);
+  border: 1px solid rgba(233, 203, 215, 0.9);
+  border-radius: 20px;
+  padding: 28px;
+}
+
+.specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+}
+
+.specs-table th,
+.specs-table td {
+  text-align: left;
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(233, 203, 215, 0.9);
+}
+
+.specs-table th {
+  color: #8a5068;
+  background: rgba(247, 231, 238, 0.78);
+}
+
+.terms-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.terms-list p {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(247, 231, 238, 0.72);
 }
 
 .cart-layout {
@@ -840,7 +882,8 @@ footer {
   .service-page-grid,
   .shop-grid,
   .booking-layout,
-  .cart-layout {
+  .cart-layout,
+  .info-grid-section {
     grid-template-columns: 1fr;
   }
 
