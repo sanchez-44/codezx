@@ -66,6 +66,7 @@
             <a href="contacto.html#nosotros">Nosotros</a>
           </div>
         </li>
+        <li class="cart-link-item"><a href="carrito.html" class="cart-link">Carrito <span class="cart-count">0</span></a></li>
       </ul>
     </nav>
   </header>
@@ -73,40 +74,28 @@
   <main class="subpage-main">
     <section class="section page-hero compact-hero">
       <h2>Tienda</h2>
-      <p class="section-text">Aquí encontrarás nuestras categorías y productos especiales para sorprender con estilo.</p>
+      <p class="section-text">Añade productos al carrito y arma tu sorpresa ideal con precios en soles peruanos.</p>
     </section>
 
     <section id="tienda" class="section">
-      <h2>Categorías</h2>
-      <div class="category-grid">
-        <a class="category-card" href="#pr1"><img src="img/PR1.jpeg" alt="Perfumes" /><span>Perfumes</span></a>
-        <a class="category-card" href="#pr2"><img src="img/PR2.webp" alt="Productos de limpieza" /><span>Limpieza</span></a>
-        <a class="category-card" href="#pr3"><img src="img/PR3.jpeg" alt="Dulces" /><span>Dulces</span></a>
-        <a class="category-card" href="#pr4"><img src="img/PR4.jpeg" alt="Regalos decorados" /><span>Regalos</span></a>
-        <a class="category-card" href="#pr5"><img src="img/PR5.jpeg" alt="Cuidado de la piel" /><span>Cuidado de la piel</span></a>
-        <a class="category-card" href="#pr6"><img src="img/PR6.jpg" alt="Caja sorpresa" /><span>Caja sorpresa</span></a>
-        <a class="category-card" href="#pr7"><img src="img/PR7.jpeg" alt="Productos faciales" /><span>Productos faciales</span></a>
-        <a class="category-card" href="#pr8"><img src="img/PR8.jpeg" alt="Rosas" /><span>Rosas</span></a>
-        <a class="category-card" href="#pr9"><img src="img/PR9.jpeg" alt="Similares" /><span>Similares</span></a>
-      </div>
-    </section>
-
-    <section id="catalogo" class="section">
-      <h2>Productos de tienda</h2>
-      <div class="product-sections">
-        <article class="product-block" id="pr1"><img src="img/PR1.jpeg" alt="Perfumes" /><div><h3>PR1: Perfumes</h3><p>Fragancias especiales para sorprender con un detalle elegante.</p></div></article>
-        <article class="product-block" id="pr2"><img src="img/PR2.webp" alt="Productos de limpieza" /><div><h3>PR2: Productos de limpieza</h3><p>Opciones útiles para complementar detalles y canastas.</p></div></article>
-        <article class="product-block" id="pr3"><img src="img/PR3.jpeg" alt="Dulces" /><div><h3>PR3: Dulces</h3><p>Chocolates y antojos dulces para acompañar tus sorpresas.</p></div></article>
-        <article class="product-block" id="pr4"><img src="img/PR4.jpeg" alt="Regalos decorados" /><div><h3>PR4: Regalos decorados</h3><p>Detalles personalizados listos para impresionar.</p></div></article>
-        <article class="product-block" id="pr5"><img src="img/PR5.jpeg" alt="Cuidado de la piel" /><div><h3>PR5: Cuidado de la piel</h3><p>Artículos pensados para consentir y crear una experiencia de autocuidado.</p></div></article>
-        <article class="product-block" id="pr6"><img src="img/PR6.jpg" alt="Caja sorpresa" /><div><h3>PR6: Caja sorpresa</h3><p>Cajas armadas con detalles especiales para una entrega inolvidable.</p></div></article>
-        <article class="product-block" id="pr7"><img src="img/PR7.jpeg" alt="Productos faciales" /><div><h3>PR7: Productos faciales</h3><p>Complementos de belleza ideales para regalos delicados y modernos.</p></div></article>
-        <article class="product-block" id="pr8"><img src="img/PR8.jpeg" alt="Rosas" /><div><h3>PR8: Rosas</h3><p>Rosas para decorar cenas, sorpresas y arreglos de alto impacto visual.</p></div></article>
-        <article class="product-block" id="pr9"><img src="img/PR9.jpeg" alt="Similares" /><div><h3>PR9: Similares</h3><p>Productos relacionados para ampliar tus opciones de regalo y decoración.</p></div></article>
+      <h2>Productos disponibles</h2>
+      <div class="shop-grid">
+        <article class="shop-card" id="pr1"><img src="img/PR1.jpeg" alt="Perfumes" /><h3>Perfumes</h3><p>Fragancias especiales para sorprender con un detalle elegante.</p><div class="shop-card-footer"><strong>S/ 79.90</strong><button class="btn add-cart-btn" data-add-product="PR1">Añadir al carrito</button></div></article>
+        <article class="shop-card" id="pr2"><img src="img/PR2.webp" alt="Productos de limpieza" /><h3>Productos de limpieza</h3><p>Opciones útiles para complementar detalles y canastas.</p><div class="shop-card-footer"><strong>S/ 24.90</strong><button class="btn add-cart-btn" data-add-product="PR2">Añadir al carrito</button></div></article>
+        <article class="shop-card" id="pr3"><img src="img/PR3.jpeg" alt="Dulces" /><h3>Dulces</h3><p>Chocolates y antojos para acompañar tus sorpresas.</p><div class="shop-card-footer"><strong>S/ 18.50</strong><button class="btn add-cart-btn" data-add-product="PR3">Añadir al carrito</button></div></article>
+        <article class="shop-card" id="pr4"><img src="img/PR4.jpeg" alt="Regalos decorados" /><h3>Regalos decorados</h3><p>Detalles personalizados listos para impresionar.</p><div class="shop-card-footer"><strong>S/ 69.90</strong><button class="btn add-cart-btn" data-add-product="PR4">Añadir al carrito</button></div></article>
+        <article class="shop-card" id="pr5"><img src="img/PR5.jpeg" alt="Cuidado de la piel" /><h3>Cuidado de la piel</h3><p>Artículos pensados para consentir y crear autocuidado.</p><div class="shop-card-footer"><strong>S/ 54.90</strong><button class="btn add-cart-btn" data-add-product="PR5">Añadir al carrito</button></div></article>
+        <article class="shop-card" id="pr6"><img src="img/PR6.jpg" alt="Caja sorpresa" /><h3>Caja sorpresa</h3><p>Caja armada con detalles especiales para una entrega inolvidable.</p><div class="shop-card-footer"><strong>S/ 119.90</strong><button class="btn add-cart-btn" data-add-product="PR6">Añadir al carrito</button></div></article>
+        <article class="shop-card" id="pr7"><img src="img/PR7.jpeg" alt="Productos faciales" /><h3>Productos faciales</h3><p>Complementos de belleza delicados y modernos.</p><div class="shop-card-footer"><strong>S/ 42.90</strong><button class="btn add-cart-btn" data-add-product="PR7">Añadir al carrito</button></div></article>
+        <article class="shop-card" id="pr8"><img src="img/PR8.jpeg" alt="Rosas" /><h3>Rosas</h3><p>Rosas para decorar cenas y sorpresas de alto impacto.</p><div class="shop-card-footer"><strong>S/ 39.90</strong><button class="btn add-cart-btn" data-add-product="PR8">Añadir al carrito</button></div></article>
+        <article class="shop-card" id="pr9"><img src="img/PR9.jpeg" alt="Similares" /><h3>Similares</h3><p>Productos relacionados para ampliar tus opciones.</p><div class="shop-card-footer"><strong>S/ 29.90</strong><button class="btn add-cart-btn" data-add-product="PR9">Añadir al carrito</button></div></article>
       </div>
     </section>
   </main>
 
+  <div id="ui-toast" class="ui-toast" aria-live="polite"></div>
+
   <footer id="footer-info"><p>© 2026 Amor & Detalles. Diseñado para celebrar el amor.</p></footer>
+  <script src="app.js"></script>
 </body>
 </html>
