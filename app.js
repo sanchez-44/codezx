@@ -308,8 +308,129 @@ function renderCartPage() {
 }
 
 function bindCartControls() { document.querySelectorAll("[data-cart-inc]").forEach((btn) => btn.addEventListener("click", () => updateCartProduct(btn.dataset.cartInc, 1))); document.querySelectorAll("[data-cart-dec]").forEach((btn) => btn.addEventListener("click", () => updateCartProduct(btn.dataset.cartDec, -1))); document.querySelectorAll("[data-cart-remove]").forEach((btn) => btn.addEventListener("click", () => removeCartItem(btn.dataset.cartRemove))); }
-function updateCartProduct(id, delta) { const cart = getCart(); const item = cart.find((entry) => entry.id === id); if (!item || item.type !== "product") return; item.quantity = Math.max(1, item.quantity + delta); item.total = item.quantity * item.price; saveCart(cart); renderCartPage(); }
-function removeCartItem(id) { const cart = getCart().filter((item) => item.id !== id); saveCart(cart); renderCartPage(); }
+function updateCartProduct(id, delta) { const cart = getCart(); const item = cart.find((entry) => entry.id === id); if (!item || item.type !== "product") return; item.quantity = Math.max(1, item.quantity + delta); item.total = item.quantity * item.price; saveCart(cart); renderCartPage(); renderCheckoutPage(); }
+function removeCartItem(id) { const cart = getCart().filter((item) => item.id !== id); saveCart(cart); renderCartPage(); renderCheckoutPage(); }
 function renderCartSummary() { const cart = getCart(); const subtotal = cart.reduce((acc, item) => acc + (item.total || 0), 0); const reserveTotal = cart.filter((item) => item.type === "service").reduce((acc, item) => acc + (item.reserve || 0), 0); const finalEl = document.querySelector("#cart-subtotal"); const reserveEl = document.querySelector("#cart-reserve"); const totalEl = document.querySelector("#cart-total"); if (finalEl) finalEl.textContent = money(subtotal); if (reserveEl) reserveEl.textContent = money(reserveTotal); if (totalEl) totalEl.textContent = money(subtotal); }
 
-document.addEventListener("DOMContentLoaded", () => { updateCartIndicators(); renderProductDetailPage(); renderServiceDetailPage(); bindProductButtons(); bindServiceButtons(); bindServiceForm(); renderCartPage(); });
+function computeCheckoutTotals(cart, deliveryMethod = "olva", servicePaymentMode = "50") {
+  const productSubtotal = cart.filter(i => i.type === "product").reduce((a, i) => a + (i.total || 0), 0);
+  const serviceSubtotal = cart.filter(i => i.type === "service").reduce((a, i) => a + (i.total || 0), 0);
+  const serviceReserve = cart.filter(i => i.type === "service").reduce((a, i) => a + (i.reserve || 0), 0);
+  const delivery = productSubtotal > 0 ? (deliveryMethod === "rappi" ? 15 : 10) : 0;
+  const servicePayment = serviceSubtotal > 0 ? (servicePaymentMode === "100" ? serviceSubtotal : serviceReserve) : 0;
+  const total = productSubtotal + delivery + servicePayment;
+  return { productSubtotal, serviceSubtotal, serviceReserve, delivery, total };
+}
+
+function renderCheckoutPage() {
+  if (document.body.dataset.page !== "checkout") return;
+  const cart = getCart();
+  const empty = document.querySelector("#cart-empty");
+  const section = document.querySelector("#checkout-section");
+  const list = document.querySelector("#checkout-order-items");
+  if (!list || !section) return;
+  if (!cart.length) {
+    if (empty) empty.hidden = false;
+    section.hidden = true;
+    return;
+  }
+  if (empty) empty.hidden = true;
+  section.hidden = false;
+  list.innerHTML = cart.map(item => `<div class="order-mini-item"><div><strong>${item.name}</strong><small>${item.type === "service" ? "Servicio" : `Cantidad x ${item.quantity}`}</small></div><strong>${money(item.total || item.price)}</strong></div>`).join("");
+  const hasServices = cart.some(item => item.type === "service");
+  const reserveBlock = document.querySelector("#reserve-mode-block");
+  if (reserveBlock) reserveBlock.hidden = !hasServices;
+  updateCheckoutTotals();
+}
+
+function updateCheckoutTotals() {
+  if (document.body.dataset.page !== "checkout") return;
+  const cart = getCart();
+  const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked')?.value || "olva";
+  const servicePaymentMode = document.querySelector('input[name="servicePaymentMode"]:checked')?.value || "50";
+  const totals = computeCheckoutTotals(cart, deliveryMethod, servicePaymentMode);
+  const ids = {
+    products: document.querySelector("#checkout-products-subtotal"),
+    services: document.querySelector("#checkout-services-subtotal"),
+    delivery: document.querySelector("#checkout-delivery"),
+    servicePayment: document.querySelector("#checkout-service-payment"),
+    total: document.querySelector("#checkout-total")
+  };
+  if (ids.products) ids.products.textContent = money(totals.productSubtotal);
+  if (ids.services) ids.services.textContent = money(totals.serviceSubtotal);
+  if (ids.delivery) ids.delivery.textContent = money(totals.delivery);
+  if (ids.servicePayment) ids.servicePayment.textContent = money(totals.servicePayment);
+  if (ids.total) ids.total.textContent = money(totals.total);
+}
+
+function showStatusModal(type, title, text) {
+  const modal = document.querySelector("#status-modal");
+  const card = document.querySelector("#status-card");
+  const icon = document.querySelector("#status-icon");
+  const titleEl = document.querySelector("#status-title");
+  const textEl = document.querySelector("#status-text");
+  if (!modal || !card || !icon || !titleEl || !textEl) return;
+  card.className = `status-card status-${type}`;
+  icon.textContent = type === "success" ? "✓" : type === "error" ? "✕" : "!";
+  titleEl.textContent = title;
+  textEl.textContent = text;
+  modal.classList.add("show");
+  setTimeout(() => modal.classList.remove("show"), 2600);
+}
+
+function bindCheckoutForm() {
+  if (document.body.dataset.page !== "checkout") return;
+  const form = document.querySelector("#checkout-form");
+  if (!form) return;
+  document.querySelectorAll('input[name="deliveryMethod"], input[name="servicePaymentMode"]').forEach(el => {
+    el.addEventListener("change", updateCheckoutTotals);
+  });
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const cart = getCart();
+    if (!cart.length) {
+      showStatusModal("warning", "Carrito vacío", "Agrega productos o servicios antes de realizar el pedido.");
+      return;
+    }
+    const fd = new FormData(form);
+    const required = ["firstName","lastName","address","city","region","phone","email"];
+    const invalid = required.some(name => !String(fd.get(name) || "").trim());
+    const email = String(fd.get("email") || "");
+    const phone = String(fd.get("phone") || "");
+    const acceptTerms = document.querySelector("#acceptTerms")?.checked;
+    if (invalid || !email.includes("@") || phone.trim().length < 7 || !acceptTerms) {
+      showStatusModal("warning", "Datos erróneos", "Corrige la información del formulario y vuelve a intentarlo.");
+      return;
+    }
+    const paymentMethod = fd.get("paymentMethod");
+    if (!paymentMethod) {
+      showStatusModal("error", "Pedido no realizado", "Selecciona un método de pago válido.");
+      return;
+    }
+    const totals = computeCheckoutTotals(
+      cart,
+      document.querySelector('input[name="deliveryMethod"]:checked')?.value || "olva",
+      document.querySelector('input[name="servicePaymentMode"]:checked')?.value || "50"
+    );
+    showStatusModal("success", "Pedido realizado", `Pago procesado correctamente por ${money(totals.total)}. Confirmación visual generada.`);
+    localStorage.removeItem(STORE_KEY);
+    updateCartIndicators();
+    setTimeout(() => {
+      renderCartPage();
+      renderCheckoutPage();
+      form.reset();
+    }, 1000);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateCartIndicators();
+  renderProductDetailPage();
+  renderServiceDetailPage();
+  bindProductButtons();
+  bindServiceButtons();
+  bindServiceForm();
+  renderCartPage();
+  renderCheckoutPage();
+  bindCheckoutForm();
+});
