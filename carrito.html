@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito | Amor & Detalles</title>
+  <link rel="icon" type="image/jpeg" href="img/logo.jpeg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="subpage-header">
+    <div class="topbar">
+      <div class="topbar-text">Síguenos y contáctanos en nuestras plataformas</div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/brunoyosiney.sanchezibanez.1" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="Flogo.jpg" alt="Facebook" /></a>
+        <a href="mailto:brunosanchez654@gmail.com" aria-label="Gmail"><img src="GMlogo.png" alt="Gmail" /></a>
+        <a href="https://www.instagram.com/jsmith0980/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="IGlogo.avif" alt="Instagram" /></a>
+        <a href="https://www.tiktok.com/@laplace444" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><img src="TTlogo.avif" alt="TikTok" /></a>
+        <a href="https://wa.me/51940705646" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><img src="Wlogo.webp" alt="WhatsApp" /></a>
+        <a href="https://www.youtube.com/@brunosanchez2800" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="YTlogo.avif" alt="YouTube" /></a>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <h1 class="logo"><img src="img/logo.jpeg" alt="Logo Amor & Detalles" /><span>Amor & Detalles</span></h1>
+      <ul class="nav-menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li class="dropdown">
+          <a href="tienda.html">Tienda</a>
+          <div class="dropdown-menu mega-menu">
+            <div class="dropdown-column">
+              <h4>Productos</h4>
+              <a href="tienda.html#pr1">PR1: Perfumes</a>
+              <a href="tienda.html#pr2">PR2: Productos de limpieza</a>
+              <a href="tienda.html#pr3">PR3: Dulces</a>
+              <a href="tienda.html#pr4">PR4: Regalos decorados</a>
+            </div>
+            <div class="dropdown-column">
+              <h4>Colecciones</h4>
+              <a href="tienda.html#pr5">PR5: Cuidado de la piel</a>
+              <a href="tienda.html#pr6">PR6: Caja sorpresa</a>
+              <a href="tienda.html#pr7">PR7: Productos faciales</a>
+            </div>
+            <div class="dropdown-column">
+              <h4>Especiales</h4>
+              <a href="tienda.html#pr8">PR8: Rosas</a>
+              <a href="tienda.html#pr9">PR9: Similares</a>
+            </div>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="servicios.html">Servicios</a>
+          <div class="dropdown-menu">
+            <a href="servicios.html#cenas-romanticas">Cenas románticas</a>
+            <a href="servicios.html#arreglos-florales">Arreglos florales</a>
+            <a href="servicios.html#momentos-inolvidables">Momentos inolvidables</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="contacto.html">Contactanos</a>
+          <div class="dropdown-menu">
+            <a href="contacto.html#contacto-form">Escríbenos</a>
+            <a href="https://wa.me/51940705646" target="_blank" rel="noopener noreferrer">WhatsApp directo</a>
+            <a href="mailto:brunosanchez654@gmail.com">Correo electrónico</a>
+            <a href="contacto.html#footer-info">Información general</a>
+            <a href="contacto.html#nosotros">Nosotros</a>
+          </div>
+        </li>
+        <li class="cart-link-item active-link"><a href="carrito.html" class="cart-link">Carrito <span class="cart-count">0</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="subpage-main">
+    <section class="section page-hero compact-hero">
+      <h2>Carrito</h2>
+      <p class="section-text">Revisa tus productos, reservas y el monto total en soles peruanos.</p>
+    </section>
+
+    <section id="cart-empty" class="section empty-cart-state" hidden>
+      <h2>Tu carrito está vacío</h2>
+      <p class="section-text">Agrega productos de la tienda o reserva un servicio para verlo aquí.</p>
+      <a class="btn" href="tienda.html">Volver a la tienda</a>
+    </section>
+
+    <section class="section cart-layout" id="cart-summary">
+      <div class="cart-list" id="cart-items"></div>
+      <aside class="cart-summary-box">
+        <h3>Totales del carrito</h3>
+        <div class="summary-row"><span>Subtotal</span><strong id="cart-subtotal">S/ 0.00</strong></div>
+        <div class="summary-row"><span>Reserva 50% servicios</span><strong id="cart-reserve">S/ 0.00</strong></div>
+        <div class="summary-row total"><span>Total</span><strong id="cart-total">S/ 0.00</strong></div>
+        <a class="btn checkout-btn" href="contacto.html#contacto-form">Finalizar compra / reserva</a>
+      </aside>
+    </section>
+  </main>
+
+  <div id="ui-toast" class="ui-toast" aria-live="polite"></div>
+
+  <footer id="footer-info"><p>© 2026 Amor & Detalles. Diseñado para celebrar el amor.</p></footer>
+  <script src="app.js"></script>
+</body>
+</html>
