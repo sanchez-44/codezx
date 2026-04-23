@@ -6,8 +6,11 @@
   <title>Carrito | Amor & Detalles</title>
   <link rel="icon" type="image/jpeg" href="img/logo.jpeg" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .checkout-layout{display:grid;grid-template-columns:1.45fr .95fr;gap:26px;align-items:start}.checkout-panel,.order-panel{background:rgba(255,248,251,.96);border:1px solid rgba(233,203,215,.9);border-radius:20px;padding:24px}.checkout-panel h3,.order-panel h3{color:#8a5068;margin-bottom:18px}.checkout-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.checkout-grid .full-width{grid-column:1/-1}.checkout-grid label{display:flex;flex-direction:column;gap:8px}.mini-note{font-size:13px;color:#8a5068}.payment-block,.delivery-block,.reserve-mode-block{padding:14px 0;border-top:1px solid rgba(233,203,215,.9)}.payment-option,.delivery-option,.reserve-option{display:flex;gap:10px;align-items:flex-start;margin:10px 0}.order-items-mini{display:grid;gap:12px;margin-bottom:16px}.order-mini-item{display:flex;justify-content:space-between;gap:12px;padding-bottom:10px;border-bottom:1px solid rgba(233,203,215,.9)}.order-mini-item small{display:block;color:#7b4d5e}.order-total-rows{display:grid;gap:10px;margin-top:14px}.order-total-row{display:flex;justify-content:space-between;gap:12px}.place-order-btn{width:100%;margin-top:18px}.status-modal{position:fixed;inset:0;background:rgba(55,26,37,.45);display:flex;align-items:center;justify-content:center;padding:20px;z-index:4000;opacity:0;pointer-events:none;transition:opacity .25s ease}.status-modal.show{opacity:1;pointer-events:auto}.status-card{width:min(420px,100%);background:#fff;border-radius:22px;padding:28px;text-align:center;box-shadow:0 18px 40px rgba(0,0,0,.18)}.status-icon{width:86px;height:86px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:800;margin:0 auto 16px}.status-success .status-icon{background:#e9f8ef;color:#2c9b5b}.status-error .status-icon{background:#ffeceb;color:#d34b4b}.status-warning .status-icon{background:#fff5df;color:#d38a1f}@media (max-width:900px){.checkout-layout,.checkout-grid{grid-template-columns:1fr}}
+  </style>
 </head>
-<body>
+<body data-page="checkout">
   <header class="subpage-header">
     <div class="topbar">
       <div class="topbar-text">Síguenos y contáctanos en nuestras plataformas</div>
@@ -25,77 +28,83 @@
       <h1 class="logo"><img src="img/logo.jpeg" alt="Logo Amor & Detalles" /><span>Amor & Detalles</span></h1>
       <ul class="nav-menu">
         <li><a href="index.html">Inicio</a></li>
-        <li class="dropdown">
-          <a href="tienda.html">Tienda</a>
-          <div class="dropdown-menu mega-menu">
-            <div class="dropdown-column">
-              <h4>Productos</h4>
-              <a href="tienda.html#pr1">PR1: Perfumes</a>
-              <a href="tienda.html#pr2">PR2: Productos de limpieza</a>
-              <a href="tienda.html#pr3">PR3: Dulces</a>
-              <a href="tienda.html#pr4">PR4: Regalos decorados</a>
-            </div>
-            <div class="dropdown-column">
-              <h4>Colecciones</h4>
-              <a href="tienda.html#pr5">PR5: Cuidado de la piel</a>
-              <a href="tienda.html#pr6">PR6: Caja sorpresa</a>
-              <a href="tienda.html#pr7">PR7: Productos faciales</a>
-            </div>
-            <div class="dropdown-column">
-              <h4>Especiales</h4>
-              <a href="tienda.html#pr8">PR8: Rosas</a>
-              <a href="tienda.html#pr9">PR9: Similares</a>
-            </div>
-          </div>
-        </li>
-        <li class="dropdown">
-          <a href="servicios.html">Servicios</a>
-          <div class="dropdown-menu">
-            <a href="servicios.html#cenas-romanticas">Cenas románticas</a>
-            <a href="servicios.html#arreglos-florales">Arreglos florales</a>
-            <a href="servicios.html#momentos-inolvidables">Momentos inolvidables</a>
-          </div>
-        </li>
-        <li class="dropdown">
-          <a href="contacto.html">Contactanos</a>
-          <div class="dropdown-menu">
-            <a href="contacto.html#contacto-form">Escríbenos</a>
-            <a href="https://wa.me/51940705646" target="_blank" rel="noopener noreferrer">WhatsApp directo</a>
-            <a href="mailto:brunosanchez654@gmail.com">Correo electrónico</a>
-            <a href="contacto.html#footer-info">Información general</a>
-            <a href="contacto.html#nosotros">Nosotros</a>
-          </div>
-        </li>
+        <li class="dropdown"><a href="tienda.html">Tienda</a><div class="dropdown-menu mega-menu"><div class="dropdown-column"><h4>Productos</h4><a href="tienda.html#pr1">PR1: Perfumes</a><a href="tienda.html#pr2">PR2: Productos de limpieza</a><a href="tienda.html#pr3">PR3: Dulces</a><a href="tienda.html#pr4">PR4: Regalos decorados</a></div><div class="dropdown-column"><h4>Colecciones</h4><a href="tienda.html#pr5">PR5: Cuidado de la piel</a><a href="tienda.html#pr6">PR6: Caja sorpresa</a><a href="tienda.html#pr7">PR7: Productos faciales</a></div><div class="dropdown-column"><h4>Especiales</h4><a href="tienda.html#pr8">PR8: Rosas</a><a href="tienda.html#pr9">PR9: Similares</a></div></div></li>
+        <li class="dropdown"><a href="servicios.html">Servicios</a><div class="dropdown-menu"><a href="servicios.html#cenas-romanticas">Cenas románticas</a><a href="servicios.html#arreglos-florales">Arreglos florales</a><a href="servicios.html#momentos-inolvidables">Momentos inolvidables</a></div></li>
+        <li class="dropdown"><a href="contacto.html">Contactanos</a><div class="dropdown-menu"><a href="contacto.html#contacto-form">Escríbenos</a><a href="https://wa.me/51940705646" target="_blank" rel="noopener noreferrer">WhatsApp directo</a><a href="mailto:brunosanchez654@gmail.com">Correo electrónico</a><a href="contacto.html#footer-info">Información general</a><a href="contacto.html#nosotros">Nosotros</a></div></li>
         <li class="cart-link-item active-link"><a href="carrito.html" class="cart-link">Carrito <span class="cart-count">0</span></a></li>
       </ul>
     </nav>
   </header>
 
   <main class="subpage-main">
-    <section class="section page-hero compact-hero">
-      <h2>Carrito</h2>
-      <p class="section-text">Revisa tus productos, reservas y el monto total en soles peruanos.</p>
-    </section>
-
     <section id="cart-empty" class="section empty-cart-state" hidden>
       <h2>Tu carrito está vacío</h2>
       <p class="section-text">Agrega productos de la tienda o reserva un servicio para verlo aquí.</p>
       <a class="btn" href="tienda.html">Volver a la tienda</a>
     </section>
 
-    <section class="section cart-layout" id="cart-summary">
-      <div class="cart-list" id="cart-items"></div>
-      <aside class="cart-summary-box">
-        <h3>Totales del carrito</h3>
-        <div class="summary-row"><span>Subtotal</span><strong id="cart-subtotal">S/ 0.00</strong></div>
-        <div class="summary-row"><span>Reserva 50% servicios</span><strong id="cart-reserve">S/ 0.00</strong></div>
-        <div class="summary-row total"><span>Total</span><strong id="cart-total">S/ 0.00</strong></div>
-        <a class="btn checkout-btn" href="contacto.html#contacto-form">Finalizar compra / reserva</a>
+    <section id="checkout-section" class="section checkout-layout">
+      <form id="checkout-form" class="checkout-panel" novalidate>
+        <h3>Detalles de facturación y entrega</h3>
+        <div class="checkout-grid">
+          <label><span>Nombre</span><input name="firstName" type="text" required /></label>
+          <label><span>Apellidos</span><input name="lastName" type="text" required /></label>
+          <label class="full-width"><span>País / Región</span><select name="country"><option value="Perú">Perú</option></select></label>
+          <label class="full-width"><span>Dirección de la calle</span><input name="address" type="text" required /></label>
+          <label><span>Localidad / Ciudad</span><input name="city" type="text" required /></label>
+          <label><span>Región / Provincia</span><input name="region" type="text" value="Lima" required /></label>
+          <label><span>Teléfono</span><input name="phone" type="tel" required /></label>
+          <label><span>Correo electrónico</span><input name="email" type="email" required /></label>
+          <label class="full-width"><span>Notas del pedido</span><textarea name="notes" rows="3" placeholder="Notas especiales para la entrega o la reserva"></textarea></label>
+        </div>
+
+        <div id="reserve-mode-block" class="reserve-mode-block" hidden>
+          <h3>Pago de servicios</h3>
+          <label class="reserve-option"><input type="radio" name="servicePaymentMode" value="50" checked /> <span>Reservar con 50%</span></label>
+          <label class="reserve-option"><input type="radio" name="servicePaymentMode" value="100" /> <span>Pagar 100% del servicio</span></label>
+        </div>
+
+        <div class="delivery-block">
+          <h3>Entrega</h3>
+          <label class="delivery-option"><input type="radio" name="deliveryMethod" value="olva" checked /> <span>Olva: S/ 10.00</span></label>
+          <label class="delivery-option"><input type="radio" name="deliveryMethod" value="rappi" /> <span>Rappi: S/ 15.00</span></label>
+          <p class="mini-note">Para servicios presenciales, el costo de envío no se aplica.</p>
+        </div>
+
+        <div class="payment-block">
+          <h3>Método de pago</h3>
+          <label class="payment-option"><input type="radio" name="paymentMethod" value="wallet" checked /> <span>Yape, Plin, Lukita</span></label>
+          <label class="payment-option"><input type="radio" name="paymentMethod" value="card" /> <span>Tarjeta de débito o crédito</span></label>
+          <label class="payment-option"><input type="radio" name="paymentMethod" value="cash" /> <span>Pago contra entrega / efectivo</span></label>
+        </div>
+
+        <label class="payment-option"><input id="acceptTerms" type="checkbox" required /> <span>He leído y acepto los términos y condiciones</span></label>
+        <button type="submit" class="place-order-btn">Realizar pedido</button>
+        <p class="mini-note">En esta versión la confirmación por correo queda simulada en la interfaz. Para enviar correos reales se necesita un servicio backend o proveedor SMTP.</p>
+      </form>
+
+      <aside class="order-panel">
+        <h3>Tu pedido</h3>
+        <div id="checkout-order-items" class="order-items-mini"></div>
+        <div class="order-total-rows">
+          <div class="order-total-row"><span>Subtotal productos</span><strong id="checkout-products-subtotal">S/ 0.00</strong></div>
+          <div class="order-total-row"><span>Servicios</span><strong id="checkout-services-subtotal">S/ 0.00</strong></div>
+          <div class="order-total-row"><span>Envío</span><strong id="checkout-delivery">S/ 0.00</strong></div>
+          <div class="order-total-row"><span>Pago actual servicios</span><strong id="checkout-service-payment">S/ 0.00</strong></div>
+          <div class="order-total-row"><span>Total a pagar</span><strong id="checkout-total">S/ 0.00</strong></div>
+        </div>
       </aside>
     </section>
   </main>
 
   <div id="ui-toast" class="ui-toast" aria-live="polite"></div>
+  <div id="status-modal" class="status-modal" aria-live="polite">
+    <div id="status-card" class="status-card status-success">
+      <div id="status-icon" class="status-icon">✓</div>
+      <h3 id="status-title">Pedido realizado</h3>
+      <p id="status-text">Tu pedido fue procesado correctamente.</p>
+    </div>
+  </div>
 
   <footer id="footer-info"><p>© 2026 Amor & Detalles. Diseñado para celebrar el amor.</p></footer>
   <script src="app.js"></script>
