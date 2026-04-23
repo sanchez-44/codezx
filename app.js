@@ -66,6 +66,45 @@ function addProduct(productId) {
   showToast(`${product.name} se añadió al carrito.`);
 }
 
+function getServiceExtraDetails(serviceKey, formData) {
+  if (serviceKey === "cenas") {
+    return {
+      tipoCena: formData.get("dinnerType") || "romántica",
+      transporte: formData.get("transport") || "No",
+      localPreferido: formData.get("venue") || "No especificado"
+    };
+  }
+
+  if (serviceKey === "flores") {
+    return {
+      florPrincipal: formData.get("flowerType") || "rosas",
+      incluirPlantas: formData.get("plants") || "No",
+      areaArreglo: formData.get("areaType") || "No especificada",
+      medidasArea: formData.get("areaSize") || "No especificadas"
+    };
+  }
+
+  if (serviceKey === "momentos") {
+    return {
+      tipoExperiencia: formData.get("momentType") || "sorpresa",
+      limusina: formData.get("limousine") || "No",
+      detalleAdicional: formData.get("momentNote") || "Sin detalle adicional"
+    };
+  }
+
+  return {};
+}
+
+function formatServiceDetails(details) {
+  if (!details) return "";
+  const rows = [];
+  Object.entries(details).forEach(([key, value]) => {
+    if (!value) return;
+    rows.push(`<span>${String(value)}</span>`);
+  });
+  return rows.join("");
+}
+
 function addServiceReservation(data) {
   const service = SERVICES[data.serviceKey];
   if (!service) return;
@@ -94,7 +133,8 @@ function addServiceReservation(data) {
       dni: data.dni,
       district: data.district,
       email: data.email,
-      phone: data.phone
+      phone: data.phone,
+      ...data.extraDetails
     }
   });
 
@@ -129,6 +169,15 @@ function bindServiceButtons() {
   });
 }
 
+function toggleServiceOptionGroups(selected) {
+  document.querySelectorAll(".service-options-grid").forEach((group) => {
+    group.classList.add("is-hidden");
+  });
+
+  const active = document.querySelector(`#options-${selected}`);
+  if (active) active.classList.remove("is-hidden");
+}
+
 function bindServiceForm() {
   const form = document.querySelector("#service-booking-form");
   if (!form) return;
@@ -145,6 +194,7 @@ function bindServiceForm() {
     const reserve = total * 0.5;
     if (totalField) totalField.textContent = money(total);
     if (reserveField) reserveField.textContent = money(reserve);
+    toggleServiceOptionGroups(select.value);
   }
 
   select?.addEventListener("change", recalc);
@@ -163,7 +213,8 @@ function bindServiceForm() {
       dni: formData.get("dni"),
       district: formData.get("district"),
       email: formData.get("email"),
-      phone: formData.get("phone")
+      phone: formData.get("phone"),
+      extraDetails: getServiceExtraDetails(formData.get("serviceType"), formData)
     });
     form.reset();
     recalc();
@@ -195,6 +246,7 @@ function renderCartPage() {
       <div class="cart-item-info">
         <h3>${item.name}</h3>
         <p>${item.type === "service" ? "Servicio reservado" : "Producto"}</p>
+        ${item.type === "service" ? `<div class="service-detail-lines">${formatServiceDetails(item.details)}</div>` : ""}
         ${item.reserve ? `<p class="reserve-note">Reserva del 50%: ${money(item.reserve)}</p>` : ""}
       </div>
       <div class="cart-item-controls">
