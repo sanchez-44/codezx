@@ -24,9 +24,55 @@ body {
   color: #fff;
 }
 
-.navbar {
+.topbar {
   position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background: rgba(20, 4, 12, 0.92);
+  z-index: 2200;
+}
+
+.topbar-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-links a {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.social-links a:hover {
+  background: #ff4f93;
+  transform: translateY(-2px);
+}
+
+.navbar {
+  position: fixed;
+  top: 54px;
   left: 0;
   width: 100%;
   padding: 20px 8%;
@@ -73,7 +119,7 @@ body {
 
 .hero-content {
   max-width: 780px;
-  padding: 220px 8% 80px;
+  padding: 270px 8% 80px;
 }
 
 .tagline {
@@ -275,6 +321,11 @@ footer {
 }
 
 @media (max-width: 900px) {
+  .topbar {
+    flex-direction: column;
+    padding: 10px 6%;
+  }
+
   .cards,
   .gallery-grid {
     grid-template-columns: 1fr;
@@ -283,6 +334,7 @@ footer {
 
 @media (max-width: 768px) {
   .navbar {
+    top: 88px;
     flex-direction: column;
     gap: 15px;
     padding: 16px 6%;
@@ -295,7 +347,7 @@ footer {
   }
 
   .hero-content {
-    padding-top: 190px;
+    padding-top: 300px;
   }
 
   .hero-content h2 {
