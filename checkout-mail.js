@@ -12,6 +12,11 @@ function checkoutGetCart() {
   }
 }
 
+function checkoutSaveCart(cart) {
+  localStorage.setItem(CHECKOUT_STORE_KEY, JSON.stringify(cart));
+  if (typeof updateCartIndicators === "function") updateCartIndicators();
+}
+
 function checkoutBuildTotals(cart) {
   const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked')?.value || "olva";
   const servicePaymentMode = document.querySelector('input[name="servicePaymentMode"]:checked')?.value || "50";
@@ -30,7 +35,7 @@ function checkoutBuildTotals(cart) {
 
   const delivery = productSubtotal > 0 ? (deliveryMethod === "rappi" ? 15 : 10) : 0;
   const servicePayment = serviceSubtotal > 0
-    ? (servicePaymentMode === "100" ? serviceSubtotal : serviceReserve)
+    ? (servicePaymentMode === "100" ? serviceSubtotal : (serviceReserve || serviceSubtotal * 0.5))
     : 0;
 
   return {
@@ -43,6 +48,59 @@ function checkoutBuildTotals(cart) {
     servicePayment,
     totalToPay: productSubtotal + delivery + servicePayment
   };
+}
+
+function checkoutItemDetails(item) {
+  if (!item.details) return "";
+  return Object.values(item.details).filter(Boolean).join(" · ");
+}
+
+function checkoutRenderOrder() {
+  const cart = checkoutGetCart();
+  const empty = document.querySelector("#cart-empty");
+  const section = document.querySelector("#checkout-section");
+  const list = document.querySelector("#checkout-order-items");
+  const reserveBlock = document.querySelector("#reserve-mode-block");
+
+  if (!list) return;
+
+  if (!cart.length) {
+    if (empty) empty.hidden = false;
+    if (section) section.hidden = true;
+    return;
+  }
+
+  if (empty) empty.hidden = true;
+  if (section) section.hidden = false;
+  if (reserveBlock) reserveBlock.hidden = !cart.some((item) => item.type === "service");
+
+  list.innerHTML = cart.map((item, index) => `
+    <div class="order-mini-item">
+      <div>
+        <strong>${item.name}</strong>
+        ${checkoutItemDetails(item) ? `<small>${checkoutItemDetails(item)}</small>` : ""}
+        <small>${item.type === "service" ? "Servicio" : `Cantidad x ${item.quantity || 1}`}</small>
+        <button type="button" class="checkout-remove-btn" data-remove-index="${index}">Quitar</button>
+      </div>
+      <strong>${checkoutMoney(item.total || item.price)}</strong>
+    </div>
+  `).join("");
+
+  list.querySelectorAll("[data-remove-index]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const current = checkoutGetCart();
+      current.splice(Number(button.dataset.removeIndex), 1);
+      checkoutSaveCart(current);
+      checkoutRenderOrder();
+    });
+  });
+
+  const totals = checkoutBuildTotals(cart);
+  document.querySelector("#checkout-products-subtotal").textContent = checkoutMoney(totals.productSubtotal);
+  document.querySelector("#checkout-services-subtotal").textContent = checkoutMoney(totals.serviceSubtotal);
+  document.querySelector("#checkout-delivery").textContent = checkoutMoney(totals.delivery);
+  document.querySelector("#checkout-service-payment").textContent = checkoutMoney(totals.servicePayment);
+  document.querySelector("#checkout-total").textContent = checkoutMoney(totals.totalToPay);
 }
 
 function checkoutBuildOrderText(cart, totals) {
@@ -103,6 +161,11 @@ function checkoutPrepareHiddenFields(form, cart, totals) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("#checkout-form");
+  checkoutRenderOrder();
+  document.querySelectorAll('input[name="deliveryMethod"], input[name="servicePaymentMode"]').forEach((input) => {
+    input.addEventListener("change", checkoutRenderOrder);
+  });
+
   if (!form) return;
 
   form.setAttribute("method", "POST");
