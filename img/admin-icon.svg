@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Acceso administrador">
+  <rect width="512" height="512" fill="none"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M160 176c0-66 42-116 96-116s96 50 96 116" stroke="#0f78a8" stroke-width="22"/>
+    <path d="M146 164h220v34H146z" fill="#348dbc" stroke="#0f78a8" stroke-width="12"/>
+    <path d="M230 55v90M282 55v90" stroke="#348dbc" stroke-width="28"/>
+    <path d="M172 202c0 86 42 146 84 146s84-60 84-146" stroke="#0f78a8" stroke-width="18"/>
+    <path d="M196 215h52v38h-52zM264 215h52v38h-52zM248 234h16" stroke="#2d3539" stroke-width="12"/>
+    <path d="M128 452c8-82 52-118 106-125M384 452c-8-82-52-118-106-125" stroke="#0f78a8" stroke-width="22"/>
+    <path d="M226 334l30 36 30-36" stroke="#0f78a8" stroke-width="18"/>
+    <rect x="294" y="316" width="112" height="82" rx="8" stroke="#2d3539" stroke-width="14"/>
+    <path d="M318 424h64M350 398v26" stroke="#2d3539" stroke-width="12"/>
+    <rect x="420" y="302" width="56" height="128" rx="10" fill="#2d3539" stroke="#2d3539" stroke-width="10"/>
+    <path d="M433 326h30M433 348h30" stroke="#fff" stroke-width="8"/>
+    <circle cx="448" cy="402" r="6" fill="#fff"/>
+    <rect x="62" y="314" width="58" height="86" rx="8" fill="#2d3539" stroke="#2d3539" stroke-width="10"/>
+    <path d="M75 333v36M88 333v36M101 333v36" stroke="#fff" stroke-width="6"/>
+  </g>
+</svg>
