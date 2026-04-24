@@ -44,7 +44,7 @@
     </section>
 
     <section id="checkout-section" class="section checkout-layout">
-      <form id="checkout-form" class="checkout-panel" novalidate>
+      <form id="checkout-form" class="checkout-panel" method="POST" action="php/enviar_pedido.php" novalidate>
         <h3>Detalles de facturación y entrega</h3>
         <div class="checkout-grid">
           <label><span>Nombre</span><input name="firstName" type="text" required /></label>
@@ -80,7 +80,7 @@
 
         <label class="payment-option"><input id="acceptTerms" type="checkbox" required /> <span>He leído y acepto los términos y condiciones</span></label>
         <button type="submit" class="place-order-btn">Realizar pedido</button>
-        <p class="mini-note">En esta versión la confirmación por correo queda simulada en la interfaz. Para enviar correos reales se necesita un servicio backend o proveedor SMTP.</p>
+        <p class="mini-note">El pedido se enviará al correo configurado en <strong>php/enviar_pedido.php</strong>. En XAMPP puede requerir configuración SMTP para que el correo salga correctamente.</p>
       </form>
 
       <aside class="order-panel">
@@ -108,5 +108,6 @@
 
   <footer id="footer-info"><p>© 2026 Amor & Detalles. Diseñado para celebrar el amor.</p></footer>
   <script src="app.js"></script>
+  <script src="checkout-mail.js"></script>
 </body>
 </html>
