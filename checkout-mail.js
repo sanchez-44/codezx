@@ -12,14 +12,27 @@ function checkoutGetCart() {
   }
 }
 
+function checkoutUpdateCartCounter() {
+  const cart = checkoutGetCart();
+  const totalItems = cart.reduce((total, item) => total + Number(item.quantity || 1), 0);
+
+  document.querySelectorAll(".cart-count").forEach((counter) => {
+    counter.textContent = totalItems;
+  });
+
+  try {
+    window.dispatchEvent(new Event("storage"));
+  } catch (error) {}
+}
+
 function checkoutSaveCart(cart) {
   localStorage.setItem(CHECKOUT_STORE_KEY, JSON.stringify(cart));
-  if (typeof updateCartIndicators === "function") updateCartIndicators();
+  checkoutUpdateCartCounter();
 }
 
 function checkoutClearCart() {
   localStorage.removeItem(CHECKOUT_STORE_KEY);
-  if (typeof updateCartIndicators === "function") updateCartIndicators();
+  checkoutUpdateCartCounter();
   checkoutRenderOrder();
 }
 
@@ -61,6 +74,21 @@ function checkoutItemDetails(item) {
   return Object.values(item.details).filter(Boolean).join(" · ");
 }
 
+function checkoutResetTotals() {
+  const targets = {
+    "#checkout-products-subtotal": 0,
+    "#checkout-services-subtotal": 0,
+    "#checkout-delivery": 0,
+    "#checkout-service-payment": 0,
+    "#checkout-total": 0
+  };
+
+  Object.entries(targets).forEach(([selector, value]) => {
+    const element = document.querySelector(selector);
+    if (element) element.textContent = checkoutMoney(value);
+  });
+}
+
 function checkoutRenderOrder() {
   const cart = checkoutGetCart();
   const empty = document.querySelector("#cart-empty");
@@ -68,12 +96,15 @@ function checkoutRenderOrder() {
   const list = document.querySelector("#checkout-order-items");
   const reserveBlock = document.querySelector("#reserve-mode-block");
 
+  checkoutUpdateCartCounter();
+
   if (!list) return;
 
   if (!cart.length) {
     if (empty) empty.hidden = false;
     if (section) section.hidden = true;
     list.innerHTML = "";
+    checkoutResetTotals();
     return;
   }
 
@@ -231,6 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       localStorage.removeItem(CHECKOUT_STORE_KEY);
+      checkoutUpdateCartCounter();
       checkoutShowStatus("success", "Pedido enviado", "Tu pedido fue enviado correctamente. Te contactaremos pronto para coordinar el pago y la entrega.");
 
       setTimeout(() => {
