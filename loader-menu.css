@@ -1,0 +1,115 @@
+body.is-loading-page {
+  overflow: hidden;
+}
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #fff8fb 0%, #f7e1ea 45%, #f0c9d9 100%);
+  transition: opacity 0.55s ease, visibility 0.55s ease;
+}
+
+.page-loader.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-card {
+  display: grid;
+  place-items: center;
+  gap: 18px;
+  padding: 34px 42px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(184, 116, 145, 0.22);
+  box-shadow: 0 24px 60px rgba(112, 42, 70, 0.18);
+  backdrop-filter: blur(12px);
+}
+
+.loader-gift {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #d67c9d, #8a5068);
+  color: #ffffff;
+  font-size: 48px;
+  box-shadow: 0 18px 36px rgba(138, 80, 104, 0.28);
+  animation: giftPulse 1.15s ease-in-out infinite;
+}
+
+.loader-card p {
+  margin: 0;
+  color: #8a5068;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.loader-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.loader-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #b87491;
+  animation: dotBounce 0.9s ease-in-out infinite;
+}
+
+.loader-dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.loader-dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.nav-menu > li > a,
+.cart-link,
+.customer-button {
+  transition: background 0.22s ease, color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.nav-menu > li > a:hover,
+.nav-menu > li:hover > a,
+.nav-menu > li.active-link > a {
+  background: rgba(214, 124, 157, 0.28);
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 10px 14px;
+  box-shadow: 0 10px 22px rgba(72, 29, 46, 0.14);
+}
+
+.dropdown-menu a:hover {
+  background: linear-gradient(135deg, rgba(214, 124, 157, 0.92), rgba(184, 116, 145, 0.92));
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.mega-menu .dropdown-column a:hover {
+  background: linear-gradient(135deg, rgba(214, 124, 157, 0.92), rgba(138, 80, 104, 0.92));
+  color: #ffffff;
+}
+
+.cart-link:hover,
+.customer-button:hover {
+  background: rgba(214, 124, 157, 0.34);
+  box-shadow: 0 10px 22px rgba(72, 29, 46, 0.16);
+}
+
+@keyframes giftPulse {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.08) rotate(-3deg); }
+}
+
+@keyframes dotBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50% { transform: translateY(-8px); opacity: 1; }
+}
