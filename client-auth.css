@@ -72,59 +72,54 @@
   gap: 12px;
 }
 
-.customer-form label {
-  display: grid;
-  gap: 6px;
-  color: #7b4d5e;
-  font-weight: 700;
-}
-
-.customer-form input {
-  padding: 12px;
-  border: 1px solid rgba(228, 197, 210, 0.95);
-  border-radius: 12px;
-  background: #fffafd;
-}
-
-.customer-form button,
-.customer-actions button,
+.customer-access-links a,
+.customer-main-link,
+.customer-secondary-link,
+.customer-recover-link,
 .customer-mini-btn {
   width: 100%;
   padding: 12px 14px;
   border-radius: 14px;
-  background: #b87491;
-  color: #ffffff;
   text-align: center;
   text-decoration: none;
   font-weight: 800;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.customer-actions button:hover,
-.customer-mini-btn:hover,
-.customer-form button:hover {
+.customer-main-link,
+.customer-mini-btn {
+  background: #b87491;
+  color: #ffffff;
+}
+
+.customer-secondary-link {
+  background: rgba(184, 116, 145, 0.14);
+  color: #8a5068;
+  border: 1px solid rgba(184, 116, 145, 0.22);
+}
+
+.customer-recover-link {
+  background: transparent;
+  color: #8a5068;
+  padding: 6px 8px;
+  font-size: 0.92rem;
+}
+
+.customer-main-link:hover,
+.customer-mini-btn:hover {
   background: #a65f7e;
 }
 
-.customer-check {
-  display: flex !important;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 10px !important;
-  font-weight: 600 !important;
-}
-
-.customer-check input {
-  width: auto;
+.customer-secondary-link:hover {
+  background: rgba(184, 116, 145, 0.22);
 }
 
 .customer-note {
   font-size: 13px;
   color: #8a5068;
   margin: 0;
-}
-
-.hidden-customer-form {
-  display: none;
 }
 
 .customer-welcome h3 {
@@ -139,6 +134,7 @@
   background: rgba(184, 116, 145, 0.15);
   color: #8a5068;
   font-weight: 800;
+  text-transform: capitalize;
 }
 
 .benefits-list {
