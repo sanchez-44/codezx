@@ -1,0 +1,206 @@
+.customer-access {
+  position: relative;
+  justify-self: end;
+  min-width: 260px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.customer-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(72, 29, 46, 0.18);
+  backdrop-filter: blur(8px);
+}
+
+.customer-button:hover {
+  background: rgba(255, 214, 228, 0.28);
+}
+
+.customer-panel {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  width: min(390px, 92vw);
+  background: rgba(255, 248, 251, 0.98);
+  border: 1px solid rgba(233, 203, 215, 0.95);
+  border-radius: 22px;
+  padding: 20px;
+  color: #4c2d37;
+  box-shadow: 0 20px 45px rgba(72, 29, 46, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+  z-index: 2600;
+}
+
+.customer-access.open .customer-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.customer-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.customer-tab {
+  padding: 11px 12px;
+  border-radius: 14px;
+  background: rgba(247, 231, 238, 0.95);
+  color: #8a5068;
+}
+
+.customer-tab.active {
+  background: #b87491;
+  color: #ffffff;
+}
+
+.customer-form {
+  display: grid;
+  gap: 12px;
+}
+
+.customer-form label {
+  display: grid;
+  gap: 6px;
+  color: #7b4d5e;
+  font-weight: 700;
+}
+
+.customer-form input {
+  padding: 12px;
+  border: 1px solid rgba(228, 197, 210, 0.95);
+  border-radius: 12px;
+  background: #fffafd;
+}
+
+.customer-form button,
+.customer-actions button,
+.customer-mini-btn {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #b87491;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.customer-actions button:hover,
+.customer-mini-btn:hover,
+.customer-form button:hover {
+  background: #a65f7e;
+}
+
+.customer-check {
+  display: flex !important;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px !important;
+  font-weight: 600 !important;
+}
+
+.customer-check input {
+  width: auto;
+}
+
+.customer-note {
+  font-size: 13px;
+  color: #8a5068;
+  margin: 0;
+}
+
+.hidden-customer-form {
+  display: none;
+}
+
+.customer-welcome h3 {
+  color: #8a5068;
+  margin: 10px 0 6px;
+}
+
+.customer-badge {
+  display: inline-flex;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(184, 116, 145, 0.15);
+  color: #8a5068;
+  font-weight: 800;
+}
+
+.benefits-list {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.benefits-list div {
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(247, 231, 238, 0.85);
+  border: 1px solid rgba(233, 203, 215, 0.85);
+}
+
+.benefits-list strong,
+.benefits-list span {
+  display: block;
+}
+
+.benefits-list strong {
+  color: #8a5068;
+}
+
+.customer-preferences {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.customer-preferences p {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+.customer-preferences span {
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #7b4d5e;
+  font-weight: 700;
+}
+
+.customer-actions {
+  display: grid;
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .customer-access {
+    justify-self: center;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .customer-panel {
+    right: 50%;
+    transform: translate(50%, 10px);
+  }
+
+  .customer-access.open .customer-panel {
+    transform: translate(50%, 0);
+  }
+}
