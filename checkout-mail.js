@@ -17,6 +17,12 @@ function checkoutSaveCart(cart) {
   if (typeof updateCartIndicators === "function") updateCartIndicators();
 }
 
+function checkoutClearCart() {
+  localStorage.removeItem(CHECKOUT_STORE_KEY);
+  if (typeof updateCartIndicators === "function") updateCartIndicators();
+  checkoutRenderOrder();
+}
+
 function checkoutBuildTotals(cart) {
   const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked')?.value || "olva";
   const servicePaymentMode = document.querySelector('input[name="servicePaymentMode"]:checked')?.value || "50";
@@ -67,6 +73,7 @@ function checkoutRenderOrder() {
   if (!cart.length) {
     if (empty) empty.hidden = false;
     if (section) section.hidden = true;
+    list.innerHTML = "";
     return;
   }
 
@@ -74,17 +81,31 @@ function checkoutRenderOrder() {
   if (section) section.hidden = false;
   if (reserveBlock) reserveBlock.hidden = !cart.some((item) => item.type === "service");
 
-  list.innerHTML = cart.map((item, index) => `
-    <div class="order-mini-item">
-      <div>
-        <strong>${item.name}</strong>
-        ${checkoutItemDetails(item) ? `<small>${checkoutItemDetails(item)}</small>` : ""}
-        <small>${item.type === "service" ? "Servicio" : `Cantidad x ${item.quantity || 1}`}</small>
-        <button type="button" class="checkout-remove-btn" data-remove-index="${index}">Quitar</button>
-      </div>
-      <strong>${checkoutMoney(item.total || item.price)}</strong>
+  list.innerHTML = `
+    <div class="checkout-clear-row">
+      <button type="button" class="checkout-clear-btn" id="checkout-clear-cart">Vaciar carrito</button>
     </div>
-  `).join("");
+    ${cart.map((item, index) => `
+      <div class="order-mini-item">
+        <div>
+          <strong>${item.name}</strong>
+          ${checkoutItemDetails(item) ? `<small>${checkoutItemDetails(item)}</small>` : ""}
+          <small>${item.type === "service" ? "Servicio" : `Cantidad x ${item.quantity || 1}`}</small>
+          <button type="button" class="checkout-remove-btn" data-remove-index="${index}">Quitar</button>
+        </div>
+        <strong>${checkoutMoney(item.total || item.price)}</strong>
+      </div>
+    `).join("")}
+  `;
+
+  const clearButton = list.querySelector("#checkout-clear-cart");
+  if (clearButton) {
+    clearButton.addEventListener("click", () => {
+      if (confirm("¿Seguro que deseas vaciar todo el carrito?")) {
+        checkoutClearCart();
+      }
+    });
+  }
 
   list.querySelectorAll("[data-remove-index]").forEach((button) => {
     button.addEventListener("click", () => {
