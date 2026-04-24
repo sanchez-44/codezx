@@ -6,6 +6,42 @@
   <title>Detalle de producto | Amor & Detalles</title>
   <link rel="icon" type="image/jpeg" href="../img/logo.jpeg" />
   <link rel="stylesheet" href="../styles.css" />
+  <style>
+    #product-detail-form button[type="submit"] {
+      width: 190px;
+      min-height: 48px;
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+    }
+
+    .product-back-actions {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .product-back-actions .related-link {
+      width: 190px;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-radius: 18px;
+      padding: 12px 20px;
+    }
+
+    @media (max-width: 768px) {
+      #product-detail-form button[type="submit"],
+      .product-back-actions .related-link {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body data-page="product-detail" data-asset-prefix="../">
   <header class="subpage-header">
@@ -46,7 +82,9 @@
         <h2>Opciones del producto</h2>
         <div class="detail-price" id="detail-price"></div>
         <div id="detail-form-wrap"></div>
-        <a class="btn related-link" href="../tienda.html">Volver a tienda</a>
+        <div class="product-back-actions">
+          <a class="btn related-link" href="../tienda.html">Volver a tienda</a>
+        </div>
       </div>
     </section>
 
