@@ -1,6 +1,33 @@
+function getAssetPrefix() {
+  return document.body?.dataset?.assetPrefix || "";
+}
+
+function ensureCustomerAccessExists() {
+  let access = document.querySelector("#customer-access");
+  if (access) return access;
+
+  const navbar = document.querySelector(".navbar");
+  if (!navbar) return null;
+
+  access = document.createElement("div");
+  access.id = "customer-access";
+  access.className = "customer-access";
+  access.innerHTML = `
+    <button id="customer-button" class="customer-button" type="button">
+      <span>👤</span>
+      <strong id="customer-button-text">Área clientes</strong>
+    </button>
+    <div id="customer-panel" class="customer-panel"></div>
+  `;
+
+  navbar.appendChild(access);
+  return access;
+}
+
 async function getCustomerSession() {
   try {
-    const response = await fetch("cliente/session_status.php", { cache: "no-store" });
+    const prefix = getAssetPrefix();
+    const response = await fetch(`${prefix}cliente/session_status.php`, { cache: "no-store" });
     if (!response.ok) return { logged: false };
     return await response.json();
   } catch (error) {
@@ -20,6 +47,7 @@ function showCustomerToast(message) {
 }
 
 function renderGuestPanel(panel) {
+  const prefix = getAssetPrefix();
   panel.innerHTML = `
     <div class="customer-tabs">
       <button type="button" class="customer-tab active">Iniciar sesión</button>
@@ -28,18 +56,19 @@ function renderGuestPanel(panel) {
 
     <div class="customer-form customer-access-links">
       <p class="customer-note">Accede con tu cuenta para activar beneficios, ofertas y atención personalizada.</p>
-      <a class="customer-main-link" href="cliente/login.php">Iniciar sesión</a>
-      <a class="customer-secondary-link" href="cliente/registro.php">Crear cuenta nueva</a>
-      <a class="customer-recover-link" href="cliente/forgot_password.php">Olvidé mi contraseña</a>
+      <a class="customer-main-link" href="${prefix}cliente/login.php">Iniciar sesión</a>
+      <a class="customer-secondary-link" href="${prefix}cliente/registro.php">Crear cuenta nueva</a>
+      <a class="customer-recover-link" href="${prefix}cliente/forgot_password.php">Olvidé mi contraseña</a>
     </div>
   `;
 
   panel.querySelector("#go-register-tab")?.addEventListener("click", () => {
-    window.location.href = "cliente/registro.php";
+    window.location.href = `${prefix}cliente/registro.php`;
   });
 }
 
 function renderLoggedPanel(panel, cliente) {
+  const prefix = getAssetPrefix();
   const firstName = String(cliente.nombre || "Cliente").split(" ")[0];
   panel.innerHTML = `
     <div class="customer-welcome">
@@ -61,14 +90,15 @@ function renderLoggedPanel(panel, cliente) {
     </div>
 
     <div class="customer-actions">
-      <a class="customer-mini-btn" href="cliente/dashboard.php">Mi cuenta</a>
-      <a class="customer-mini-btn" href="tienda.html">Ver tienda</a>
-      <a class="customer-mini-btn" href="cliente/logout.php">Cerrar sesión</a>
+      <a class="customer-mini-btn" href="${prefix}cliente/dashboard.php">Mi cuenta</a>
+      <a class="customer-mini-btn" href="${prefix}tienda.html">Ver tienda</a>
+      <a class="customer-mini-btn" href="${prefix}cliente/logout.php">Cerrar sesión</a>
     </div>
   `;
 }
 
 async function renderCustomerPanel() {
+  ensureCustomerAccessExists();
   const panel = document.querySelector("#customer-panel");
   const buttonText = document.querySelector("#customer-button-text");
   if (!panel) return;
@@ -86,7 +116,7 @@ async function renderCustomerPanel() {
 }
 
 function bindCustomerAccess() {
-  const access = document.querySelector("#customer-access");
+  const access = ensureCustomerAccessExists();
   const button = document.querySelector("#customer-button");
 
   if (!access || !button) return;
