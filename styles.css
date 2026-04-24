@@ -434,6 +434,46 @@ footer {
   color: #fff;
 }
 
+.admin-image-button {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 74px;
+  height: 74px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: 22px;
+  background: rgba(255, 248, 251, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow: 0 16px 34px rgba(72, 29, 46, 0.24);
+  text-decoration: none;
+  z-index: 2800;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+}
+
+.admin-image-button img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(184, 116, 145, 0.55);
+}
+
+.admin-image-button span {
+  color: #8a5068;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.admin-image-button:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 22px 42px rgba(72, 29, 46, 0.28);
+  background: #ffffff;
+}
+
 .intro-effects {
   position: fixed;
   inset: 0;
@@ -821,7 +861,7 @@ footer {
 .ui-toast {
   position: fixed;
   right: 24px;
-  bottom: 24px;
+  bottom: 110px;
   background: rgba(96, 49, 68, 0.95);
   color: #fff;
   padding: 14px 18px;
@@ -960,5 +1000,18 @@ footer {
   .hero-content h2,
   .page-hero h2 {
     font-size: 34px;
+  }
+
+  .admin-image-button {
+    right: 16px;
+    bottom: 16px;
+    width: 66px;
+    height: 66px;
+    border-radius: 20px;
+  }
+
+  .admin-image-button img {
+    width: 32px;
+    height: 32px;
   }
 }
